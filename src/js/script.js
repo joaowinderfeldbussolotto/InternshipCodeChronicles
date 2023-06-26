@@ -1,10 +1,20 @@
-let pin = Math.floor(Math.random() * 9000) + 1000
-console.log(pin)
+let pin = Math.floor(Math.random() * 900) + 100
 const verifyButton = document.getElementById('verifyButton')
+const showPIN = document.getElementById('showPIN')
+let threeDigitRegex = /^\d{3}$/
 
 //Calling the verify function when button pressed
 verifyButton.addEventListener('click', function () {
   validatePin()
+})
+
+showPIN.addEventListener('click', function () {
+  let displayPin = document.getElementById('pin')
+  if (displayPin.style.display == 'block') 
+   displayPin.style.display = 'none'
+  else
+   displayPin.style.display = 'block'
+  displayPin.textContent = pin
 })
 
 function createResultMessage(message, success) {
@@ -15,8 +25,8 @@ function createResultMessage(message, success) {
 
 function validatePin() {
   let guess = document.getElementById('guess').value
-  if (guess == '' || isNaN(guess) || guess < 0) {
-    createResultMessage('Por favor entre um número válido', false)
+  if (guess == '' || isNaN(guess) || !threeDigitRegex.test(guess)) {
+    createResultMessage('Por favor entre um PIN válido de três digitos númericos',false)
     return
   }
   guess = Number(guess)
