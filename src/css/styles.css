@@ -12,6 +12,14 @@ h1 {
 p {
   margin-bottom: 20px;
 }
+#result {
+  font-size: 20px;
+  margin-top: 20px;
+  padding: 10px;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
 
 input[type='number'] {
   padding: 10px;
