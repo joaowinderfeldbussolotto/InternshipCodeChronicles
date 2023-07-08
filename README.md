@@ -1,11 +1,11 @@
-## Integrantes Equipe
-    Luiz Paulo Grafetti Terres
-    João Victor Winderfeld bBssolotto
-    +
+## Integrantes da Equipe
+- Luiz Paulo Grafetti Terres
+- João Victor Winderfeld Bussolotto
+- Luiz Augusto Scarsi
 
-## API(s)
-    API xkcd (add link)
-    API giphy (add link)
+## APIs [any-api.com]
+- API [xkcd](https://any-api.com/xkcd_com/xkcd_com/docs/API_Description): Webcomic of romance, sarcasm, math, and language.
+- API [giphy](https://any-api.com/giphy_com/giphy_com/docs/API_Description): GIPHY, the first and largest GIF search engine
 
 Clone esta branch do repositório:
 ```bash
