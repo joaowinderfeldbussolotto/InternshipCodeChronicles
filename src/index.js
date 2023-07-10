@@ -4,6 +4,14 @@ const axios = require('axios');
 const app = express();
 const config = require('./config');
 
+app.get('/api/comic', (req,res) => {
+    let comicNumber = ''
+    let url = `https://xkcd.com/${comicNumber}/info.0.json`
+    axios.get(url)
+    .then(response => {
+        res.json(response.data.img)
+    })
+})
 
 app.get('/api/gifs', (req, res) => {
     const giphyApiKey = config.giphyApiKey;
