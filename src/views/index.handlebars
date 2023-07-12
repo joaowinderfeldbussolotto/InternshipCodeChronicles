@@ -1,5 +1,9 @@
+    {{#each gifs}}
+    <img src="{{ this.url }}" alt="{{ this.title }}" style="display: inline-block; margin-right: 10px;">
+    {{/each}}
+
     <h1>{{ wcomic.title }}</h1>
 
-    <img src="{{ wcomic.img }}" alt="" />
-    <p > {{ wcomic.alt }} </p>
+    <img src="{{ wcomic.url }}" alt="" />
+    <p > {{ wcomic.description }} </p>
 
