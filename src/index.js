@@ -16,6 +16,8 @@ app.set('view engine', 'handlebars');
 // Define routes
 app.get('/api/comic', getComic);
 
+app.get('/api/random', getRandomPage)
+
 app.get('/api/gifs', getGifs);
 
 app.get('/', getIndex);
@@ -108,8 +110,18 @@ function getLastWComic() {
       return comic;
     });
 }
-    // const currentComicData = getLastWComic().then(comic => console.log(comic));
-    // console.log(currentComicData)
+
+async function getRandomPage(req, res) {
+    try {
+      const wcData = await getRandomWComic();
+      const comicTitle = wcData.title;
+      const gifs = await getGifsTeste(comicTitle);
+      res.render('index', { wcomic: wcData, gifs: gifs });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  }
 
 function getRandomWComic() {
     return getLastWComic().then(comic => {
@@ -123,10 +135,3 @@ function getRandomWComic() {
        });
     });
 }
-
-app.get('/random', (req, res) => {
-    getRandomWComic().then(randomComic => {
-        res.render('index', 
-        {wcomic: randomComic})
-    })
-})
