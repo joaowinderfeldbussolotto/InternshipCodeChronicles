@@ -108,3 +108,25 @@ function getLastWComic() {
       return comic;
     });
 }
+    // const currentComicData = getLastWComic().then(comic => console.log(comic));
+    // console.log(currentComicData)
+
+function getRandomWComic() {
+    return getLastWComic().then(comic => {
+       const currentComicNumber = comic.id;
+       const randomComicNumber = Math.floor(Math.random() * currentComicNumber) + 1;
+       return axios.get(`https://xkcd.com/${randomComicNumber}/info.0.json`)
+       .then(response => {
+        const {num, title, img, alt} = response.data;
+        const comic = new Comic(num, img, title, alt);
+        return comic;
+       });
+    });
+}
+
+app.get('/random', (req, res) => {
+    getRandomWComic().then(randomComic => {
+        res.render('index', 
+        {wcomic: randomComic})
+    })
+})
