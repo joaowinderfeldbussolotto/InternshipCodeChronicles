@@ -1,4 +1,5 @@
     <h1>{{ wcomic.title }}</h1>
+    <h2>{{ wcomic.id}} </h2>
 
     <img src="{{ wcomic.url }}" alt="{{ wcomic.description }}" />
     <p > {{ wcomic.description }} </p>
@@ -6,4 +7,8 @@
     {{#each gifs}}
     <img src="{{ this.url }}" alt="{{ this.title }}" style="height: 150px; display: inline-block; margin-right: 10px;">
     {{/each}}
+
+    <button onclick="location.href='/comic/?curr={{wcomic.prev}}'">Previous</button>
+    <button onclick="location.href='/comic/'">Random</button>
+    <button onclick="location.href='/comic/?curr={{wcomic.next}}'">Next</button>
 

@@ -14,11 +14,9 @@ app.engine('handlebars', exphbs.engine({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 
 // Define routes
-// app.get('/api/random', getRandomPage)
 
-app.get('/api/gifs', getGifs);
-
-app.get('/', getIndex);
+app.get('/', (req, res) => res.redirect('/comic'))
+app.get('/comic', getIndex);
 
 // Start server
 app.listen(PORT, () => {
@@ -26,10 +24,11 @@ app.listen(PORT, () => {
 });
 
 // Route handlers
-async function getGifsTeste(comicTitle) {
+
+async function getGifs(comicTitle, limit = 2) {
     try {
       const giphyApiKey = config.giphyApiKey;
-      const url = `https://api.giphy.com/v1/gifs/search?api_key=${giphyApiKey}&limit=3&q=${comicTitle}`;
+      const url = `https://api.giphy.com/v1/gifs/search?api_key=${giphyApiKey}&limit=${limit}&q=${comicTitle}`;
   
       const response = await axios.get(url);
       const gifData = response.data;
@@ -47,93 +46,46 @@ async function getGifsTeste(comicTitle) {
     }
   }
 
-function getGifs(req, res) {
-  const giphyApiKey = config.giphyApiKey;
-  const search = req.query.search || 'cats';
-
-  const url = `https://api.giphy.com/v1/gifs/search?api_key=${giphyApiKey}&limit=3&q=${search}`;
-  axios
-    .get(url)
-    .then(response => {
-      const gifData = response.data;
-      if (gifData.data.length > 0) {
-        const gifs = gifData.data.map(gif => {
-          const { id, title } = gif;
-          const url = gif.images.original.url;
-          return new Gif(id, url, title);
-        });
-        res.status(200).json(gifs);
-      } else {
-        res.status(404).json({ message: 'No GIF found' });
-      }
-    })
-    .catch(error => {
-      console.error(error);
-      res.status(500).json({ error: 'Internal Server Error' });
-    });
-}
+ 
 
 async function getIndex(req, res) {
-    try {
-      const wcData = await getWComic();
+  try {
+      let current = parseInt(req.query.curr);
+      const wcData = await getWComic(current);
       const comicTitle = wcData.title;
-      const gifs = await getGifsTeste(comicTitle);
-      res.render('index', { wcomic: wcData, gifs: gifs });
+      const gifs = await getGifs(comicTitle);
+      //res.render('index', { wcomic: wcData, gifs: gifs, prev: wcData.id -1, next: wcData.id+1});
+      res.render('index', { wcomic: wcData, gifs: gifs});
+
     } catch (error) {
+      res.json(error)
       console.error(error);
       res.status(500).json({ error: 'Internal Server Error' });
     }
   }
 
-  function getWComic(random = true) {
+function getComicId(lastComic, comic){
+  if (!comic) 
+    return Math.floor(Math.random() * lastComic) + 1;
+  if (comic > lastComic) 
+    return comic - lastComic;
+  return comic;
+}
+
+function getWComic(comicId) {
+  
 	return axios
     .get(`https://xkcd.com/info.0.json`)
     .then(response => {
       const { num, title, img, alt } = response.data;
       const comic = new Comic(num, img, title, alt);
-      if (random) {
-        const randomComicNumber = Math.floor(Math.random() * comic.id) + 1;
-        return axios.get(`https://xkcd.com/${randomComicNumber}/info.0.json`)
+      comicId = getComicId(comic.id, comicId);
+        return axios.get(`https://xkcd.com/${comicId}/info.0.json`)
         .then(response => {
         const { num, img, title, alt } = response.data;
         const rComic = new Comic (num, img, title, alt);
         return rComic;
         });
-      } else return comic;
     });
 }
   
-// function getLastWComic() {
-//   return axios
-//     .get(`https://xkcd.com/info.0.json`)
-//     .then(response => {
-//       const { num, title, img, alt } = response.data;
-//       const comic = new Comic(num, img, title, alt);
-//       return comic;
-//     });
-// }
-
-// async function getRandomPage(req, res) {
-//     try {
-//       const wcData = await getRandomWComic();
-//       const comicTitle = wcData.title;
-//       const gifs = await getGifsTeste(comicTitle);
-//       res.render('index', { wcomic: wcData, gifs: gifs });
-//     } catch (error) {
-//       console.error(error);
-//       res.status(500).json({ error: 'Internal Server Error' });
-//     }
-//   }
-
-// function getRandomWComic() {
-//     return getLastWComic().then(comic => {
-//        const currentComicNumber = comic.id;
-//        const randomComicNumber = Math.floor(Math.random() * currentComicNumber) + 1;
-//        return axios.get(`https://xkcd.com/${randomComicNumber}/info.0.json`)
-//        .then(response => {
-//         const {num, title, img, alt} = response.data;
-//         const comic = new Comic(num, img, title, alt);
-//         return comic;
-//        });
-//     });
-// }
