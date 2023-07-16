@@ -14,42 +14,60 @@ Esta é uma aplicação web simples que permite o usuário visualizar uma tirinh
 - API [giphy](https://any-api.com/giphy_com/giphy_com/docs/API_Description): GIPHY, the first and largest GIF search engine
 
 ## Tecnologias
-- HTML5
-- CSS3
-- Bootstrap
-- Handlebars
-- JavaScript
-- Node.js
-- Express
-- Axios
+```
+├── HTML 5
+├── Bootstrap
+├── Javascript
+└── Node.js
+    ├── Axios
+    ├── Express
+    │   └── + Handlebars
+    └── Path
+```
 
-## Instruções para clonar:
+## Arquitetura
+```
+.
+├── models
+│   ├── Comic.js
+│   ├── Gif.js
+│   └── MediaItem.js
+├── views
+│   ├── layouts
+│   │   └── main.handlebars
+│   └── index.handlebars
+├── index.js
+├── config.js
+├── package-lock.json
+├── package.json
+├── README.md
+```
+OBS: Em função da limitação de transações diária da chave giphy disponibilizada para ambiente de desenvolvimento, a chave não está publicamente junto ao código. Para obter acesso ao conteúdo do giphy e a uma experiênicia completa da aplicação, o arquivo ``` config.js ``` deve ser requisitado à equipe de desenvolvimento, ou uma nova chave deve ser adquirida pelo usuário. Para mais informações: https://developers.giphy.com/docs/sdk/#web.
+
+## Como testar esta aplicação na sua máquina:
+### Pré-requisitos
+- Navegador web atualizado.
+- Conexão com a internet.
+- [Git](https://git-scm.com/downloads): ferramenta para gerenciamento de configuração.
+- [Npm](https://www.npmjs.com/): gerenciador de pacotes.
+
+
 Clone esta branch do repositório:
 ```bash
 git clone -b equipe-1 --single-branch https://github.com/Compass-pb-aws-2023-FURG-IFRS-UFFS/sprint-2-pb-aws-furg-ifrs-uffs && cd sprint-2-pb-aws-furg-ifrs-uffs
 ```
-
-## Como utilizar a aplicação
-- Realizar o clone
-- Instalar dependências da aplicação: ```npm install```
-- Dentro da pasta ```src```, executar ```npm run dev```
-- Acessar ```localhost:3000``` no navegador
-
-## Pré-requisitos
-- Navegador web atualizado
-- Conexão com a internet
-
-## Arquitetura
-* ```src```
-    * ```models```
-        * ```Comic.js```
-        * ```Gif.js```
-        * ```MediaItem.js```
-    * ```views```
-        * ```layouts```
-            * ```main.handlebars```
-        * ```index.handlebars```
-    * ```index.js```
+Instale as dependências da aplicação: 
+```
+npm install
+```
+Execute o script para rodar a aplicação com [Nodemon](https://www.npmjs.com/package/nodemon)
+```
+npm run dev
+```
+Agora basta acessar a porta ```3000``` do seu localhost no navegador:
+```
+localhost:3000
+```
 
 ## Dificuldades encontradas
 - Distribuição das atividades de forma equivalente e dinâmica
