@@ -1,6 +1,5 @@
 const axios = require('axios');
 const Comic = require('../models/Comic');
-const giphyController = require('./giphyController');
 
 async function getMaxComicId() {
     let comic = await getLastComic();
@@ -22,7 +21,6 @@ async function getLastComic() {
     });
     } catch (error) {
         console.error(error);
-        throw error;
     }
 }
 
@@ -38,7 +36,6 @@ async function getRandomComic() {
             });
     } catch (error) {
         console.error(error);
-        throw error;
     }
 }
 
@@ -51,7 +48,7 @@ async function getRandomComic() {
 function assureValidId(max, id) {
     if (!id) 
       id = Math.floor(Math.random() * max) + 1;
-    else if (id > max) 
+    else if (id > max || id < 1) 
       id = 0;
     return id;
 }
@@ -73,7 +70,6 @@ async function getComicById(id) {
             });
     } catch (error) {
         console.error(error);
-        throw error;
     }
 }
 

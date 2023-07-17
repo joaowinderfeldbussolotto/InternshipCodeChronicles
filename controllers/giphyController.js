@@ -33,7 +33,6 @@ async function getGifs(comicTitle, limit = 2) {
         return gifs;
     } catch (error) {
         console.error(error);
-        throw error;
     }
 }
 
