@@ -1,64 +1,80 @@
 const axios = require('axios');
 const Comic = require('../models/Comic');
-
 const giphyController = require('./giphyController');
 
-/**
-* Retrieves the index page with the comic data and related GIFs.
-* @param {Object} req - The request object.
-* @param {Object} res - The response object.
-*/
-async function getIndex(req, res) {
-    try {
-        let current = parseInt(req.query.curr);
-        const wcData = await getWComic(current);
-        const comicTitle = wcData.title;
-        const gifs = await giphyController.getGifs(comicTitle);
-        res.render('index', { wcomic: wcData, gifs: gifs });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
+async function getMaxComicId() {
+    let comic = await getLastComic();
+    return comic.id;
 }
 
-/**
- * Calculates the comic ID based on the last comic and the current comic.
- * @param {number} lastComic - The ID of the last comic available.
- * @param {number} comic - The ID of the current comic.
- * @returns {number} The calculated comic ID.
- */
-function getComicId(lastComic, comic) {
-    if (!comic) 
-      return Math.floor(Math.random() * lastComic) + 1;
-    if (comic > lastComic) 
-      return comic - lastComic;
+function retrieveData (data) {
+    const { num, title, img, alt } = data;
+    const comic = new Comic(num, img, title, alt);
     return comic;
 }
 
-/**
- * Retrieves the comic data for the index page.
- * @param {number} comicId - The ID of the comic. If not provided, a random comic will be fetched.
- * @returns {Comic} The Comic object representing the fetched comic.
- */
-async function getWComic(comicId) {
+async function getLastComic() {
     try {
         return axios
         .get(`https://xkcd.com/info.0.json`)
         .then(response => {
-        const { num, title, img, alt } = response.data;
-        const comic = new Comic(num, img, title, alt);
-        comicId = getComicId(comic.id, comicId);
-        return axios.get(`https://xkcd.com/${comicId}/info.0.json`)
-            .then(response => {
-            const { num, img, title, alt } = response.data;
-            const rComic = new Comic(num, img, title, alt);
-            return rComic;
-            });
-        });
+        return retrieveData(response.data);
+    });
     } catch (error) {
         console.error(error);
         throw error;
     }
 }
 
-module.exports = {getIndex};
+async function getRandomComic() {
+    try {
+        const maxLimitId = await getMaxComicId();
+        const randomId = Math.floor(Math.random() * maxLimitId) + 1;
+        
+        return axios
+            .get(`https://xkcd.com/${randomId}/info.0.json`)
+            .then(response => {
+                return retrieveData(response.data);
+            });
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+}
+
+/**
+ * Calculates the comic ID based on the last comic and the current comic.
+ * @param {number} max - The ID of the last comic available.
+ * @param {number} id - The ID of the current comic.
+ * @returns {number} The calculated comic ID.
+ */
+function assureValidId(max, id) {
+    if (!id) 
+      id = Math.floor(Math.random() * max) + 1;
+    else if (id > max) 
+      id = 0;
+    return id;
+}
+
+/**
+ * Retrieves the comic data for the index page.
+ * @param {number} id - The ID of the comic. If not provided, a random comic will be fetched.
+ * @returns {Comic} The Comic object representing the fetched comic.
+ */
+async function getComicById(id) {
+    try {
+        const maxLimitId = await getMaxComicId();
+        id = assureValidId(maxLimitId, id);
+        if (id == 0) return false;
+        return axios
+            .get(`https://xkcd.com/${id}/info.0.json`)
+            .then(response => {
+                return retrieveData(response.data);
+            });
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+}
+
+module.exports = { getRandomComic, getComicById, getLastComic };

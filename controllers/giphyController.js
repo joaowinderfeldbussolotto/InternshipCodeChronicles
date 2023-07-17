@@ -1,6 +1,7 @@
 const axios = require('axios');
 const Gif = require('../models/Gif');
 
+// if giphy's api key is not available, runs the program anyways with just the comic
 let giphyApiKey = 0;
 try {
     const config = require('../config');
@@ -19,18 +20,15 @@ try {
  */
 async function getGifs(comicTitle, limit = 2) {
     try {
-        if (!giphyApiKey) {
+        if (!giphyApiKey)
             return;
-        }
         const url = `https://api.giphy.com/v1/gifs/search?api_key=${giphyApiKey}&limit=${limit}&q=${comicTitle}`;
-
         const response = await axios.get(url);
         const gifData = response.data;
-
         const gifs = gifData.data.map(gif => {
-        const { id, title } = gif;
-        const url = gif.images.downsized.url;
-        return new Gif(id, url, title);
+            const { id, title } = gif;
+            const url = gif.images.downsized.url;
+            return new Gif(id, url, title);
         });
         return gifs;
     } catch (error) {
