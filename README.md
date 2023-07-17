@@ -36,13 +36,29 @@ Esta é uma aplicação web simples que permite o usuário visualizar uma tirinh
 │   ├── layouts
 │   │   └── main.handlebars
 │   └── index.handlebars
+├── controllers
+│   ├── giphyController.js
+│   └── xkcdController.js
+├── routes
+│   └── xkcdPlusGiphy.js
 ├── index.js
 ├── config.js
 ├── package-lock.json
 ├── package.json
-├── README.md
+└── README.md
+
 ```
-OBS: Em função da limitação de transações diária da chave giphy disponibilizada para ambiente de desenvolvimento, a chave não está publicamente junto ao código. Para obter acesso ao conteúdo do giphy e a uma experiênicia completa da aplicação, o arquivo ``` config.js ``` deve ser requisitado à equipe de desenvolvimento, ou uma nova chave deve ser adquirida pelo usuário. Para mais informações: https://developers.giphy.com/docs/sdk/#web.
+OBS: Em função da limitação de transações diária da chave giphy disponibilizada para ambiente de desenvolvimento, a chave não está publicamente junto ao código. Para obter acesso ao conteúdo do giphy e a uma experiência completa da aplicação, o arquivo ``` config.js ``` deve ser requisitado à equipe de desenvolvimento, ou uma nova chave deve ser adquirida pelo usuário. 
+
+Estrutura do arquivo ```config.js```:
+```
+const giphyApiKey = 'api-key';
+
+module.exports = {
+  giphyApiKey
+};
+```
+Para mais informações: https://developers.giphy.com/docs/sdk/#web.
 
 ## Como testar esta aplicação na sua máquina:
 ### Pré-requisitos
