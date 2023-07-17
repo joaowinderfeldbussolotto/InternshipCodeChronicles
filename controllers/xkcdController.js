@@ -41,19 +41,24 @@ function getComicId(lastComic, comic) {
  * @returns {Comic} The Comic object representing the fetched comic.
  */
 async function getWComic(comicId) {
-    return axios
-    .get(`https://xkcd.com/info.0.json`)
-    .then(response => {
-    const { num, title, img, alt } = response.data;
-    const comic = new Comic(num, img, title, alt);
-    comicId = getComicId(comic.id, comicId);
-    return axios.get(`https://xkcd.com/${comicId}/info.0.json`)
+    try {
+        return axios
+        .get(`https://xkcd.com/info.0.json`)
         .then(response => {
-        const { num, img, title, alt } = response.data;
-        const rComic = new Comic(num, img, title, alt);
-        return rComic;
+        const { num, title, img, alt } = response.data;
+        const comic = new Comic(num, img, title, alt);
+        comicId = getComicId(comic.id, comicId);
+        return axios.get(`https://xkcd.com/${comicId}/info.0.json`)
+            .then(response => {
+            const { num, img, title, alt } = response.data;
+            const rComic = new Comic(num, img, title, alt);
+            return rComic;
+            });
         });
-    });
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
 }
 
 module.exports = {getIndex};

@@ -1,6 +1,15 @@
 const axios = require('axios');
 const Gif = require('../models/Gif');
-const config = require('../config');
+
+let giphyApiKey = 0;
+try {
+    const config = require('../config');
+    if (config.giphyApiKey)
+        giphyApiKey = config.giphyApiKey;
+    else throw Error;
+} catch (error) {
+    console.error('[Giphy key not found]: Please check if config.js exists on project\'s root folder and exports a valid \"giphyApiKey\"!');
+}
 
 /**
  * Retrieves GIFs related to the given comic title.
@@ -10,7 +19,9 @@ const config = require('../config');
  */
 async function getGifs(comicTitle, limit = 2) {
     try {
-        const giphyApiKey = config.giphyApiKey;
+        if (!giphyApiKey) {
+            return;
+        }
         const url = `https://api.giphy.com/v1/gifs/search?api_key=${giphyApiKey}&limit=${limit}&q=${comicTitle}`;
 
         const response = await axios.get(url);
@@ -27,4 +38,5 @@ async function getGifs(comicTitle, limit = 2) {
         throw error;
     }
 }
+
 module.exports = {getGifs};
