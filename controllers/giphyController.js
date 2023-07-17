@@ -13,10 +13,7 @@ try {
 }
 
 /**
- * Retrieves GIFs related to the given comic title.
- * @param {string} comicTitle - The title of the comic.
- * @param {number} limit - The maximum number of GIFs to retrieve. Default is 2.
- * @returns {Array} An array of Gif objects.
+ * Retrieves GIFs (Array of Gifs) related to the given comic title.
  */
 async function getGifs(comicTitle, limit = 2) {
     try {

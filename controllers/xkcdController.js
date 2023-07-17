@@ -1,17 +1,25 @@
 const axios = require('axios');
 const Comic = require('../models/Comic');
 
+/**
+ * Retrieves the ID from the latest XKCDAPI Comic.
+ */
 async function getMaxComicId() {
     let comic = await getLastComic();
     return comic.id;
 }
 
+/**
+ * Creates a Comic object from the retrieved data.
+ */
 function retrieveData (data) {
     const { num, title, img, alt } = data;
     const comic = new Comic(num, img, title, alt);
     return comic;
 }
-
+/**
+ * Retrieves the last comic from the XKCD API.
+ */
 async function getLastComic() {
     try {
         return axios
@@ -24,6 +32,9 @@ async function getLastComic() {
     }
 }
 
+/**
+ * Retrieves a random Comic
+ */
 async function getRandomComic() {
     try {
         const maxLimitId = await getMaxComicId();
@@ -41,9 +52,6 @@ async function getRandomComic() {
 
 /**
  * Calculates the comic ID based on the last comic and the current comic.
- * @param {number} max - The ID of the last comic available.
- * @param {number} id - The ID of the current comic.
- * @returns {number} The calculated comic ID.
  */
 function assureValidId(max, id) {
     if (!id) 
@@ -54,9 +62,7 @@ function assureValidId(max, id) {
 }
 
 /**
- * Retrieves the comic data for the index page.
- * @param {number} id - The ID of the comic. If not provided, a random comic will be fetched.
- * @returns {Comic} The Comic object representing the fetched comic.
+ * Retrieves the comic data given a certain id.
  */
 async function getComicById(id) {
     try {

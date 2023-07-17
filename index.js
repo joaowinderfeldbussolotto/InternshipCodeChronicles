@@ -15,6 +15,7 @@ app.set('view engine', 'handlebars');
 // Redirect the root route to the '/comic' route
 app.get('/', (req, res) => res.redirect('/comic'));
 
+// Route to handle filtering by ID
 app.get('/filter', (req,res) => {
   try {
     let id = parseInt(req.query.id);
