@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const xkcdController = require('../controllers/xkcdController');
-const giphyController = require('../controllers/giphyController');
+const xkcdController = require('../controllers/quoteController');
+const giphyController = require('../controllers/mediaController');
 
 /**
  * Method: GET
