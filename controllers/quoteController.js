@@ -1,5 +1,5 @@
 const axios = require('axios');
-// const Quote = require('../models/Quote');
+const Quote = require('../models/Quote');
 
 const maxId = 402;
 
@@ -13,8 +13,7 @@ async function getQuoteById(id) {
         return axios
         .get('https://stoic-api.vercel.app/api/quote', reqConfig)
         .then(response => {
-            return response.data
-            // return retrieveData(response.data);
+            return retrieveData(response.data.data);
     });
     } catch (error) {
         console.error(error);
@@ -48,8 +47,5 @@ async function getRandomQuote() {
 function assureValidId(id) {
     return id%(maxId+1);
 }
-
-console.log('By id ' + getQuoteById(403))
-console.log(`random ${getRandomQuote()}`)
 
 module.exports = { getRandomQuote, getQuoteById };

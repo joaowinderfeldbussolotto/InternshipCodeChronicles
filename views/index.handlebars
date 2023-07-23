@@ -7,19 +7,18 @@
     </div>
     </div>
 </form>
-
-<h1>{{ wcomic.title }}</h1>
-<h2>{{ wcomic.id}} </h2>
-<div>
-    <button type="button" class="btn btn-dark" onclick="location.href='/comic/id/{{ wcomic.prev }}'">Previous</button>
-    <button type="button" class="btn btn-dark" onclick="location.href='/comic'">Random</button>
-    <button type="button" class="btn btn-dark" onclick="location.href='/comic/id/{{ wcomic.next }}'">Next</button>
-    <button type="button" class="btn btn-dark" onclick="location.href='/comic/last'">Last Released</button>
-    <br><br><br>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 bg-dark-subtle text-emphasis-dark">
+            <div class="d-flex justify-content-md-center align-items-center vh-100">
+                <img src="{{ author.thumbnailUrl }}" alt="">
+                <p>{{{ author.excerpt }}}</p>
+            </div>
+        </div>
+        <div class="col-md-6 bg-dark text-white">
+            <div class="d-flex justify-content-md-center align-items-center vh-100 ">
+                <p>"{{ quote.quote }}"</p>
+            </div>
+        </div>
+    </div>
 </div>
-<img src="{{ wcomic.url }}" alt="{{ wcomic.description }}" />
-<p > {{ wcomic.description }} </p>
-
-{{#each gifs}}
-<img src="{{ this.url }}" alt="{{ this.title }}" style="height: 150px; display: inline-block; margin-right: 10px;">
-{{/each}}

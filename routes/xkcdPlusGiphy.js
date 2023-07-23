@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const xkcdController = require('../controllers/quoteController');
-const giphyController = require('../controllers/mediaController');
+//const giphyController = require('../controllers/mediaController');
+
+const wikiInfoController = require('../controllers/wikiInfoController');
 
 /**
  * Method: GET
@@ -9,9 +11,9 @@ const giphyController = require('../controllers/mediaController');
  */
 
 router.get('/', async (req, res) => {
-    comicData = await xkcdController.getRandomComic();
-    giphyData = await giphyController.getGifs(comicData.title);
-    res.render('index', { wcomic: comicData, gifs: giphyData });
+    quoteData = await xkcdController.getRandomQuote();
+    authorData = await wikiInfoController.getAuthorInfo(quoteData.author);
+    res.render('index', {quote: quoteData, author: authorData});
 });
 
 
@@ -23,7 +25,7 @@ router.get('/', async (req, res) => {
 
 router.get('/id/:id', async (req, res) => {
     comicData = await xkcdController.getComicById(req.params.id);
-    if (comicData) { // se id_escolhido > max_id : manda pra rota random 
+    if (comicData) {
         giphyData = await giphyController.getGifs(comicData.title);
         res.render('index', { wcomic: comicData, gifs: giphyData });
     } else {
