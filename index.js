@@ -3,7 +3,7 @@ const exphbs = require('express-handlebars');
 const path = require('path');
 const app = express();
 const PORT = 3000;
-const comic = require('./routes/xkcdPlusGiphy');
+const quote = require('./routes/quotePlusWiki');
 
 // Configure handlebars
 app.set('views', path.join(__dirname, 'views'));
@@ -12,19 +12,9 @@ app.set('view engine', 'handlebars');
 
 // Define routes
 
-// Redirect the root route to the '/comic' route
-app.get('/', (req, res) => res.redirect('/comic'));
+// Redirect the root route to the '/quote' route
+app.get('/', (req, res) => res.redirect('/quote'));
 
-// Route to handle filtering by ID
-app.get('/filter', (req,res) => {
-  try {
-    let id = parseInt(req.query.id);
-    res.redirect(`/comic/id/${id}`);
-  } catch (error) {
-    console.error(error);
-    res.redirect('/');
-  }
-});
 
 // Start server
 app.listen(PORT, () => {
@@ -32,4 +22,4 @@ app.listen(PORT, () => {
 });
 
 // Route handlers
-app.use('/comic', comic.router);
+app.use('/quote', quote.router);

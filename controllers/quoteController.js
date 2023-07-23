@@ -17,6 +17,7 @@ async function getQuoteById(id) {
     });
     } catch (error) {
         console.error(error);
+        return false;
     }
 }
 
@@ -33,13 +34,10 @@ function retrieveData (data) {
  * Retrieves a random Quote
  */
 async function getRandomQuote() {
-    try {
-        const randomId = Math.floor(Math.random() * maxId) + 1;
-        return getQuoteById(randomId);
-    } catch (error) {
-        console.error(error);
-    }
+    const randomId = Math.floor(Math.random() * maxId) + 1;
+    return getQuoteById(randomId);
 }
+
 
 /**
  * Calculates the Quote ID based on the last Quote and the current Quote.
