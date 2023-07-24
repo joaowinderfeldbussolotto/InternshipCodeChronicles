@@ -7,12 +7,12 @@
 - Angemydelson Saint-Bert
 
 ## Como utilizar essa aplicação:
-O site pode ser acessado com seu navegagor padrão usando [ESTE LINK](http://54.196.250.44:3000/quote)!
+O site pode ser acessado com seu navegador padrão usando [ESTE LINK](http://54.196.250.44:3000/quote)!
 
 ![demo](https://github.com/Compass-pb-aws-2023-FURG-IFRS-UFFS/sprint-3-pb-aws-furg-ifrs-uffs/assets/116020373/35741178-5001-42b0-9d08-56b76f397140)
 
 ## Descrição
-Esta é uma aplicação web simples que permite o usuário visualizar uma frase estóica, além de uma imagem e breve descrição do filósofo autor da frase. Pesquise mais sobre o [Estoicismo na Wikipedia](https://pt.wikipedia.org/wiki/Estoicismo)
+Esta é uma aplicação web simples que permite ao usuário visualizar uma frase estóica, além de uma imagem e breve descrição do filósofo autor da frase. Pesquise mais sobre o [Estoicismo na Wikipedia](https://pt.wikipedia.org/wiki/Estoicismo)
 
 ## APIs Utilizadas
 - API [Stoic](https://stoic-api.vercel.app/): Retorna uma frase da corrente de pensamento estóica, e seu autor e fonte.
