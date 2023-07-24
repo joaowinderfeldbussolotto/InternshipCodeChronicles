@@ -6,6 +6,11 @@
 - Luiz Augusto Scarsi
 - Angemydelson Saint-Bert
 
+## Como utilizar essa aplicação:
+O site pode ser acessado com seu navegagor padrão usando [ESTE LINK](http://54.196.250.44:3000/quote)!
+
+![demo](https://github.com/Compass-pb-aws-2023-FURG-IFRS-UFFS/sprint-3-pb-aws-furg-ifrs-uffs/assets/116020373/35741178-5001-42b0-9d08-56b76f397140)
+
 ## Descrição
 Esta é uma aplicação web simples que permite o usuário visualizar uma frase estóica, além de uma imagem e breve descrição do filósofo autor da frase. Pesquise mais sobre o [Estoicismo na Wikipedia](https://pt.wikipedia.org/wiki/Estoicismo)
 
@@ -50,12 +55,7 @@ Esta é uma aplicação web simples que permite o usuário visualizar uma frase 
 
 ## Deploy do projeto em Cloud na AWS
 ### Arquitetura na AWS
-  !! imagem aqui
-
-## Como utilizar essa aplicação:
-O site pode ser acessado com seu navegagor padrão usando [este link](http://54.147.19.114:3000/quote)
-  
-  !! imagem aqui
+![Arquitetura da AWS](https://github.com/Compass-pb-aws-2023-FURG-IFRS-UFFS/sprint-3-pb-aws-furg-ifrs-uffs/assets/57230577/434a15a1-5c6b-4838-83dc-41aa33ea1062)
 
 ## Como testar localmente essa aplicação: [devs] 
 ### Pré-requisitos
@@ -63,7 +63,6 @@ O site pode ser acessado com seu navegagor padrão usando [este link](http://54.
 - Conexão com a internet.
 - [Git](https://git-scm.com/downloads): ferramenta para gerenciamento de configuração.
 - [Npm](https://www.npmjs.com/): gerenciador de pacotes.
-
 
 Clone esta branch do repositório:
 ```bash
@@ -83,3 +82,4 @@ localhost:3000
 ```
 
 ## Dificuldades encontradas
+- Deploy da aplicação na AWS. Dificuldades ao instanciar EC2 através do Docker Machine. Opção viável tomada: usar ECS com Fargate. 
