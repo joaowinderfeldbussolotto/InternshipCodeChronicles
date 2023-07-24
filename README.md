@@ -1,4 +1,4 @@
-# Avaliação da Sprint 2 - Equipe 1 - XKCD GIFter
+# Avaliação da Sprint 2 - Equipe 1 - Stoic Quote
 
 ## Integrantes da Equipe
 - Luiz Paulo Grafetti Terres
@@ -7,62 +7,59 @@
 - Angemydelson Saint-Bert
 
 ## Descrição
-Esta é uma aplicação web simples que permite o usuário visualizar uma tirinha do XKCD e também exibe três gifs relacionados ao título da tirinha.
+Esta é uma aplicação web simples que permite o usuário visualizar uma frase estóica, além de uma imagem e breve descrição do filósofo autor da frase. Pesquise mais sobre o [Estoicismo na Wikipedia](https://pt.wikipedia.org/wiki/Estoicismo)
 
-## APIs Utilizadas [any-api.com]
-- API [xkcd](https://any-api.com/xkcd_com/xkcd_com/docs/API_Description): Webcomic of romance, sarcasm, math, and language.
-- API [giphy](https://any-api.com/giphy_com/giphy_com/docs/API_Description): GIPHY, the first and largest GIF search engine
+## APIs Utilizadas
+- API [Stoic](https://stoic-api.vercel.app/): Retorna uma frase da corrente de pensamento estóica, e seu autor e fonte.
+- API [Wikimedia](https://www.mediawiki.org/wiki/API:Main_page): Permite acessar contrúedos de páginas da Wikipedia.
 
 ## Tecnologias
 ```
 ├── HTML 5
 ├── Bootstrap
 ├── Javascript
-└── Node.js
-    ├── Axios
-    ├── Express
-    │   └── + Handlebars
-    └── Path
+├── Node.js
+│   ├── Axios
+│   ├── Express
+│   │   └── + Handlebars
+│   └── Path
+└── Docker
 ```
 
-## Arquitetura
+## Organização de Pastas e Arquivos do Projeto
 ```
 .
 ├── models
-│   ├── Comic.js
-│   ├── Gif.js
-│   └── MediaItem.js
+│   ├── Quote.js
+│   └── WikiInfo.js
 ├── views
 │   ├── layouts
 │   │   └── main.handlebars
 │   └── index.handlebars
 ├── controllers
-│   ├── giphyController.js
-│   └── xkcdController.js
+│   ├── quoteController.js
+│   └── wikiInfoController.js
 ├── routes
-│   └── xkcdPlusGiphy.js
+│   └── quotePlusWiki.js
 ├── index.js
-├── config.js
+├── Dockerfile
 ├── package-lock.json
 ├── package.json
 └── README.md
-
 ```
-OBS: Em função da limitação de transações diária da chave giphy disponibilizada para ambiente de desenvolvimento, a chave não está publicamente junto ao código. Para obter acesso ao conteúdo do giphy e a uma experiência completa da aplicação, o arquivo ``` config.js ``` deve ser requisitado à equipe de desenvolvimento, ou uma nova chave deve ser adquirida pelo usuário. 
 
-Estrutura do arquivo ```config.js```:
-```
-const giphyApiKey = 'api-key';
+## Deploy do projeto em Cloud na AWS
+### Arquitetura na AWS
+  !! imagem aqui
 
-module.exports = {
-  giphyApiKey
-};
-```
-Para mais informações: https://developers.giphy.com/docs/sdk/#web.
+## Como utilizar essa aplicação:
+O site pode ser acessado com seu navegagor padrão usando [este link](http://54.147.19.114:3000/quote)
+  
+  !! imagem aqui
 
-## Como testar esta aplicação na sua máquina:
+## Como testar localmente essa aplicação: [devs] 
 ### Pré-requisitos
-- Navegador web atualizado.
+- Navegador web.
 - Conexão com a internet.
 - [Git](https://git-scm.com/downloads): ferramenta para gerenciamento de configuração.
 - [Npm](https://www.npmjs.com/): gerenciador de pacotes.
@@ -86,6 +83,3 @@ localhost:3000
 ```
 
 ## Dificuldades encontradas
-- Distribuição das atividades de forma equivalente e dinâmica
-- Manter o código limpo e organizado durante o trabalho em equipe
-- Organizar e utilizar branches eficientemente
