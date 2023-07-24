@@ -13,11 +13,16 @@ async function getQuoteById(id) {
         return axios
         .get('https://stoic-api.vercel.app/api/quote', reqConfig)
         .then(response => {
-            return retrieveData(response.data.data);
-    });
+            return retrieveData(response.data.data);})
+        .catch(function (error) {
+        if (error.response) {
+          console.log("Foram feitas muitas requisições! Por favor, espere até fazer uma próxima!");
+          return null;
+        };}
+        );
     } catch (error) {
         console.error(error);
-        return false;
+        return null;
     }
 }
 

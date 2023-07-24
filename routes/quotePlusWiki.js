@@ -15,7 +15,6 @@ router.get('/', async (req, res) => {
     res.render('index', {quote: quoteData, author: authorData});
 });
 
-
 /**
  * Method: GET
  * Renders the index view with the quote and corresponding Wiki info for the specified ID.

@@ -1,15 +1,14 @@
-<p>{{error.data}}</p>
 <div class="container">
     <div class="row">
         <div class="col-md-6 bg-dark-subtle text-emphasis-dark">
             <div class="d-flex justify-content-md-center align-items-center vh-100">
                 <img src="{{ author.thumbnailUrl }}" alt="">
-                <p>{{{ author.excerpt }}}</p>
+                <p>&nbsp&nbsp <b> {{{ author.description }}} </b></p>
             </div>
         </div>
         <div class="col-md-6 bg-dark text-white">
             <div class="d-flex justify-content-md-center align-items-center vh-100 ">
-                <p>"{{ quote.quote }}"</p>
+                <p>"{{ quote.quote }}" - <b>{{ quote.source }}</b> </p>
             </div>
         </div>
     </div>

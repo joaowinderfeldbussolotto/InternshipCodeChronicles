@@ -1,7 +1,7 @@
 class WikiInfo {
-  constructor(title, excerpt, thumbnailUrl) {
+  constructor(title, description, thumbnailUrl) {
     this.title = title;
-    this.excerpt = excerpt;
+    this.description = description;
     this.thumbnailUrl = thumbnailUrl;
   }
 }

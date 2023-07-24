@@ -6,9 +6,9 @@ const WikiInfo = require('../models/WikiInfo');
  */
 function retrieveData (data) {
 
-    const {title, excerpt} = data;
+    const {title, description} = data;
     const thumbnailUrl = 'https:' + data.thumbnail.url;
-    return new WikiInfo(title, excerpt, thumbnailUrl);
+    return new WikiInfo(title, description, thumbnailUrl);
 }
 /**
  * Retrieves info about the author related to the given author's name : from mediawiki api.
