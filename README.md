@@ -7,7 +7,7 @@
 - Angemydelson Saint-Bert
 
 ## Como utilizar essa aplicação:
-O site pode ser acessado com seu navegador padrão usando [ESTE LINK](http://54.196.250.44:3000/quote)!
+O site pode ser acessado com seu navegador padrão usando [ESTE LINK](http://54.91.182.191:3000/quote)!
 
 ![demo](https://github.com/Compass-pb-aws-2023-FURG-IFRS-UFFS/sprint-3-pb-aws-furg-ifrs-uffs/assets/116020373/35741178-5001-42b0-9d08-56b76f397140)
 
@@ -66,7 +66,7 @@ Esta é uma aplicação web simples que permite ao usuário visualizar uma frase
 
 Clone esta branch do repositório:
 ```bash
-git clone -b equipe-1 --single-branch https://github.com/Compass-pb-aws-2023-FURG-IFRS-UFFS/sprint-2-pb-aws-furg-ifrs-uffs && cd sprint-2-pb-aws-furg-ifrs-uffs
+git clone -b equipe-1 --single-branch https://github.com/Compass-pb-aws-2023-FURG-IFRS-UFFS/sprint-3-pb-aws-furg-ifrs-uffs && cd sprint-3-pb-aws-furg-ifrs-uffs
 ```
 Instale as dependências da aplicação: 
 ```
