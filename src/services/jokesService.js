@@ -1,8 +1,9 @@
 const axios = require('axios');
 const Joke = require('./../models/Joke')
+const config = require('../config'); 
 
 const getRandomJoke = async () => {
-  const chuckNorrisApiUrl = 'https://api.chucknorris.io/jokes/random';
+  const chuckNorrisApiUrl = config.chuckNorrisApiUrl;
   const response = await axios.get(chuckNorrisApiUrl);
   return response.data;
 };
