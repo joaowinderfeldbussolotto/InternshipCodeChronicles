@@ -10,7 +10,7 @@ const getRandomJoke = async () => {
 
 const getJoke = async () => {
   const jokeData = await getRandomJoke();
-  return new Joke(jokeData);
+  return Joke.fromJSON(jokeData);
 };
 
 module.exports = {
