@@ -1,0 +1,64 @@
+openapi: 3.0.0
+info:
+  title: API da equipe 1
+  version: 1.0.0
+  description: API documentation for API 
+paths:
+  /:
+    get:
+      params: false
+      summary: Home endpoint
+      tags:
+        - Home
+      description: Returns a welcome message.
+      responses:
+        '200':
+          description: Successful response with a welcome message
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: Este é o app Equipe 1 😀 
+  /api/piadas:
+    get:
+      summary: Get a random joke from the Chuck Norris API
+      tags:
+        - Jokes
+      responses:
+        '200':
+          description: Successful response with a random joke
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Joke'
+          example:
+            data_atualizacao: '01/08/2023'
+            data_criacao: '01/08/2023'
+            icone: 'https://assets.chucknorris.host/img/avatar/chuck-norris.png'
+            id: 'dbe3f8f3-16be-4567-8e79-8daa506ba0be'
+            piada: 'CHUCK NORRIS can slit your throat with his pinkie toenail.'
+            referencia: 'https://api.chucknorris.io/jokes/2itjvbXZTcScUiuAMoOPLA'
+        '500':
+          description: Internal Server Error
+        '404':
+          description: Route not found
+components:
+  schemas:
+    Joke:
+      type: object
+      properties:
+        data_atualizacao:
+          type: string
+          format: date
+        data_criacao:
+          type: string
+          format: date
+        icone:
+          type: string
+        id:
+          type: string
+          format: uuid
+        piada:
+          type: string
+        referencia:
+          type: string
