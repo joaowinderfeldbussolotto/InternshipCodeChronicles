@@ -1,4 +1,4 @@
-const { formatActivy, generateRandomId} = require('../utils/helper');
+const { formatAccessibility, generateRandomId} = require('../utils/helper');
 
 class Activity {
   constructor(id, atividade, tipo, participantes, acessibilidade) {
@@ -28,7 +28,7 @@ class Activity {
       atividade: data.activity,
       tipo: data.type,
       participantes: data.participants,
-      acessibilidade: data.accessibility,
+      acessibilidade: formatAccessibility(data.accessibility),
     };
   }
 }

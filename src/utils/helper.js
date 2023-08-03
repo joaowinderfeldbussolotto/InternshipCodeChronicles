@@ -17,8 +17,15 @@ function formatDate(dateString) {
   return formattedDate.split('-').reverse().join('/');
 }
 
+// Function to format accessibility value to percentual
+function formatAccessibility(value) {
+  const accessibility = (value *100).toFixed(0) + '%';
+  return accessibility;
+}
+
 module.exports = {
   generateRandomId,
   formatDate,
-  formatJoke
+  formatJoke,
+  formatAccessibility
 };
