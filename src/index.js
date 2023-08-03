@@ -15,8 +15,10 @@ app.get('/', (req, res) => {
 });
 
 const jokesRoutes = require('./routes/jokesRoutes');
+const activityRoutes = require('./routes/activityRoutes');
 
 app.use('/api/piadas', jokesRoutes);
+app.use('/api/atividades', activityRoutes);
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
