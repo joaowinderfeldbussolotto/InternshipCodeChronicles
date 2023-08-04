@@ -42,6 +42,28 @@ paths:
           description: Internal Server Error
         '404':
           description: Route not found
+  /api/atividades:
+    get:
+      summary: Get a random activity from bored api
+      tags:
+        - Activity
+      responses:
+        '200':
+          description: Successful response with a random activity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Activity'
+          example:
+            id: 'b7585687-b14b-406d-a557-9cfeea4a8c16'
+            atividade: 'Wash your car'
+            tipo: 'busywork'
+            participantes: 1
+            acessibilidade: '15%'
+        '500':
+          description: Internal Server Error
+        '404':
+          description: Route not found
 components:
   schemas:
     Joke:
@@ -61,4 +83,18 @@ components:
         piada:
           type: string
         referencia:
+          type: string
+    Activity:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        atividade:
+          type: string
+        tipo:
+          type: string
+        participantes:
+          type: number
+        acessibilidade:
           type: string
