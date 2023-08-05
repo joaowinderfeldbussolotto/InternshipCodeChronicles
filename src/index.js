@@ -7,7 +7,7 @@ const yaml = require('js-yaml');
 const fs = require('fs');
 
 // Read the swagger.yaml file
-const swaggerDocument = yaml.load(fs.readFileSync('./swagger.yaml', 'utf8'));
+const swaggerDocument = yaml.load(fs.readFileSync('./src/docs/swagger.yaml', 'utf8'));
 let options = { };
 
 app.get('/', (req, res) => {
@@ -21,10 +21,6 @@ app.use('/api/piadas', jokesRoutes);
 app.use('/api/atividades', activityRoutes);
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-
-
-
-
 app.use((req, res) => {
     res.status(404).json({message: 'Route not found'});
 });
