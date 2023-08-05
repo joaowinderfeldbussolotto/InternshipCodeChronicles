@@ -29,7 +29,7 @@ A aplicação terá basicamente duas rotas que irão retornar informações vind
 
 3. Status code para sucesso da requisição será `200`
 
-<p><img src="src/docs/img/home.png"></p>
+<p><img width= 100% height=auto src="src/docs/img/home.png"></p>
 
 ***
 ### Rota → Get /api/piadas
@@ -50,11 +50,11 @@ A aplicação terá basicamente duas rotas que irão retornar informações vind
 ```
 3. Status code para sucesso da requisição será `200`
 
-<p><img src="src/docs/img/jokes.png"></p>
+<p><img width= 100% height=auto src="src/docs/img/jokes.png"></p>
 
 ### Endpoint
 
-<p><img src="src/docs/img/jokes-response.png"></p>
+<p><img width= 100% height=auto  src="src/docs/img/jokes-response.png"></p>
 
 ***
 
@@ -75,18 +75,18 @@ A aplicação terá basicamente duas rotas que irão retornar informações vind
 ```
 3. Status code para sucesso da requisição será `200`
 
-<p><img src="src/docs/img/activity.png"></p>
+<p><img width= 100% height=auto  src="src/docs/img/activity.png"></p>
 
 ### Endpoint
 
-<p><img src="src/docs/img/activity-response.png"></p>
+<p><img width= 100% height=auto  src="src/docs/img/activity-response.png"></p>
 
 ### Rota → Get /api-docs
 
 
 1. Essa rota é para montar a documentação da API usando Swagger
 
-<p><img src="src/docs/img/swagger-docs.png"></p>
+<p><img width= 100% height=auto  src="src/docs/img/swagger-docs.png"></p>
 
 ***
 <h2 align="center"> Arquitetura </h2>
