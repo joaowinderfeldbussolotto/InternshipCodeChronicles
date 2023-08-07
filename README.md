@@ -133,11 +133,37 @@ A aplicação terá basicamente duas rotas que irão retornar informações vind
 ***
 
 ***
-<h2 align="center"> Acessar API </h2>
+<h2 align="center"> Acessando à aplicação </h2>
 
 ***
 
-Utilizando o navegador que você mais gosta, visite o endereço: [API](http://)
+Utilizando o navegador que você mais gosta, visite o endereço: [API](http://44.206.165.194:8080/)
+
+***
+
+***
+<h2 align="center"> Utilização </h2>
+
+***
+
+A aplicação fornecerá dados no formato JSON para as rotas de piadas e atividades. Além disso, você poderá verificar a identificação do grupo por meio da rota inicial. A documentação completa está disponível, permitindo que você consulte a formatação dos dados retornados em cada rota.
+
+1. Consulte o endereço abaixo para obter o nome do grupo:
+```bash
+    http://44.206.165.194:8080
+```
+2. Consulte o endereço abaixo para obter o retorno json da rota piadas:
+```bash
+    http://44.206.165.194:8080/api/piadas
+```
+3. Consulte o endereço abaixo para obter o retorno json da rota atividades:
+```bash
+    http://44.206.165.194:8080/api/atividades
+```
+4. Consulte o endereço abaixo para obter a documentação:
+```bash
+    http://44.206.165.194:8080/api-docs
+```
 
 ***
 
@@ -224,5 +250,8 @@ Ficamos muito tempo procurando uma solução para o problema de permissões que 
 <h2 align="center"> Equipe </h2>
 
 ***
- 
+ <center> 
+
  [João Victor Winderfeld](https://github.com/joaowinderfeldbussolotto) - [John Marcel Silveira](https://github.com/JohnMarcelSilveira) -  [Paulo Sergio Nunes](https://github.com/Paulocc) 
+ 
+ </center>
