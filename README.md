@@ -15,6 +15,12 @@ A aplicação terá basicamente duas rotas que irão retornar informações vind
 <img height="45" src="src/docs/img/github.png">
 </p>
 
+* NodeJs - Para consumir as duas API's
+* Swagger - Para documentação da API
+* Axios - Para auxilixar no consumo da API
+* AWS - Para o armazenamento em nuvem
+* github - Para auxiliar no controle de versão e envio do projeto
+
 ***
 
 <h2 align="center"> Execução (Código Fonte) </h2>
@@ -120,7 +126,9 @@ A aplicação terá basicamente duas rotas que irão retornar informações vind
 
 ***
 
-descrever deploy e colocar fluxograma aws 
+### Arquitetura na AWS
+
+<p><img src="src\docs\img\AWS.jpg"></p>
 
 ***
 
@@ -130,6 +138,53 @@ descrever deploy e colocar fluxograma aws
 ***
 
 Utilizando o navegador que você mais gosta, visite o endereço: [API](http://)
+
+***
+
+***
+
+<h2 align="center"> Testando localmente a aplicação </h2>
+
+***
+
+### Pré-requisitos
+
+* Ter o [Postman](https://www.postman.com/) instalado
+* Conexão com a internet
+* Ter o [Git](https://git-scm.com/downloads) instalado
+* Possuir o [Npm](https://www.npmjs.com/)
+
+1. Clone este repositório para o seu ambiente local:
+```bash
+    git clone -b equipe-1 --single-branch https://github.com/Compass-pb-aws-2023-FURG-IFRS-UFFS/sprint-4-pb-aws-furg-ifrs-uffs/tree/equipe-1 && cd sprint-4-pb-aws-furg-ifrs-uffs
+```
+
+2. Altere o arquivo config.js com o link da api [joke](https://api.chucknorris.io/jokes/random) e da api [activity](https://www.boredapi.com/api/activity)
+
+3. Instale as dependências da aplicação:
+```bash
+    npm install
+```
+
+4. Execute o seguinte comando no terminal para rodar a aplicação:
+```bash
+    npm run dev
+```
+
+6. Com o Postman aberto, e com o GET seleciona, acesse um dos seguintes links
+```bash
+    http://localhost:8080/api/atividades
+```
+
+```bash
+    http://localhost:8080/api/piadas
+```
+
+7. E assim o Postman retornará as informações:
+
+<p><img src="src/docs/img/Postman.png"></p>
+
+***
 
 ***
 <h2 align="center">Como alterar e atualizar o projeto na AWS</h2>
