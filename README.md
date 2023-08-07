@@ -132,6 +132,31 @@ descrever deploy e colocar fluxograma aws
 Utilizando o navegador que você mais gosta, visite o endereço: [API](http://)
 
 ***
+<h2 align="center">Como alterar e atualizar o projeto na AWS</h2>
+
+Este repositório contém o código-fonte de uma aplicação que roda na AWS usando o serviço EC2 e Docker. Para fazer alterações na aplicação e atualizá-la na nuvem, siga os passos abaixo:
+
+1. **Faça as alterações no código**<br>
+   Primeiro, faça as alterações necessárias no código da aplicação no seu ambiente local.
+
+2. **Build da imagem Docker**<br>
+   Após as alterações, você precisa fazer o build da imagem Docker da sua aplicação. Certifique-se de que o arquivo `Dockerfile` está configurado corretamente para sua aplicação.
+
+3. **Envie a imagem Docker para o ECR**<br>
+   Depois de construir a imagem Docker localmente, envie-a para o Amazon Elastic Container Registry (ECR). Este é o repositório onde a imagem da aplicação será armazenada para uso no EC2.
+
+4. **Acesse a instância EC2 via SSH**<br>
+   Após enviar a nova imagem Docker para o Amazon Elastic Container Registry (ECR), você precisará acessar sua instância EC2 via SSH para atualizá-la com a nova imagem.
+
+5. **Rebuild da imagem Docker na instância EC2**<br>
+   Uma vez conectado à instância EC2 via SSH, você deve rebuildar o Docker com a nova imagem que foi enviada para o ECR. Isso garantirá que a aplicação esteja usando a versão mais recente da imagem.
+
+6. **Verifique a aplicação**<br>
+   Após reiniciar a aplicação, verifique se as alterações foram aplicadas corretamente.
+
+Agora sua aplicação foi atualizada na AWS com as alterações mais recentes!
+
+
 
 ***
 <h2 align="center"> Dificuldades Encontradas </h2>
