@@ -154,15 +154,15 @@ A aplicação fornecerá dados no formato JSON para as rotas de piadas e ativida
 ```
 2. Consulte o endereço abaixo para obter o retorno json da rota piadas:
 ```bash
-    http://sprint4-equipe1.us-east-1.elasticbeanstalk.com//api/piadas
+    http://sprint4-equipe1.us-east-1.elasticbeanstalk.com/api/piadas
 ```
 3. Consulte o endereço abaixo para obter o retorno json da rota atividades:
 ```bash
-    http://sprint4-equipe1.us-east-1.elasticbeanstalk.com//api/atividades
+    http://sprint4-equipe1.us-east-1.elasticbeanstalk.com/api/atividades
 ```
 4. Consulte o endereço abaixo para obter a documentação:
 ```bash
-    http://sprint4-equipe1.us-east-1.elasticbeanstalk.com//api-docs
+    http://sprint4-equipe1.us-east-1.elasticbeanstalk.com/api-docs
 ```
 
 ***
