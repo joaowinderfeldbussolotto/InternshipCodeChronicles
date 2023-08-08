@@ -107,9 +107,7 @@ A aplicação terá basicamente duas rotas que irão retornar informações vind
         * ```swagger.yaml``` 
     * ```models```
         * ```Activity.js```
-        * ```Joke.js```
-    * ```public```
-        * ```img```        
+        * ```Joke.js```       
     * ```routes```
         * ```activityRoutes.js```
         * ```jokesRoutes.js```
@@ -182,10 +180,15 @@ A aplicação fornecerá dados no formato JSON para as rotas de piadas e ativida
 
 1. Clone este repositório para o seu ambiente local:
 ```bash
-    git clone -b equipe-1 --single-branch https://github.com/Compass-pb-aws-2023-FURG-IFRS-UFFS/sprint-4-pb-aws-furg-ifrs-uffs/tree/equipe-1 && cd sprint-4-pb-aws-furg-ifrs-uffs
+    git clone -b equipe-1 --single-branch https://github.com/Compass-pb-aws-2023-FURG-IFRS-UFFS/sprint-4-pb-aws-furg-ifrs-uffs && cd sprint-4-pb-aws-furg-ifrs-uffs
 ```
 
-2. Altere o arquivo config.js com o link da api [joke](https://api.chucknorris.io/jokes/random) e da api [activity](https://www.boredapi.com/api/activity)
+2. Crie o arquivo .env na pasta raiz com o link da api [joke](https://api.chucknorris.io/jokes/random) e da api [activity](https://www.boredapi.com/api/activity)
+```json
+    PORT=8080
+    CHUCKNORRIS_API_URL=link_da_api
+    BORED_API_URL=link_da_api
+```
 
 3. Instale as dependências da aplicação:
 ```bash
