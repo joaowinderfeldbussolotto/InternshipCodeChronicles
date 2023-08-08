@@ -128,7 +128,7 @@ A aplicação terá basicamente duas rotas que irão retornar informações vind
 
 ### Arquitetura na AWS
 
-<p><img src="src\docs\img\AWS.jpg"></p>
+<p><img src="src\docs\img\diagram-aws.png"></p>
 
 ***
 
@@ -137,7 +137,7 @@ A aplicação terá basicamente duas rotas que irão retornar informações vind
 
 ***
 
-Utilizando o navegador que você mais gosta, visite o endereço: [API](http://44.206.165.194:8080/)
+Utilizando o navegador que você mais gosta, visite o endereço: [http://sprint4-equipe1.us-east-1.elasticbeanstalk.com](http://sprint4-equipe1.us-east-1.elasticbeanstalk.com/)
 
 ***
 
@@ -150,19 +150,19 @@ A aplicação fornecerá dados no formato JSON para as rotas de piadas e ativida
 
 1. Consulte o endereço abaixo para obter o nome do grupo:
 ```bash
-    http://44.206.165.194:8080
+    http://sprint4-equipe1.us-east-1.elasticbeanstalk.com/
 ```
 2. Consulte o endereço abaixo para obter o retorno json da rota piadas:
 ```bash
-    http://44.206.165.194:8080/api/piadas
+    http://sprint4-equipe1.us-east-1.elasticbeanstalk.com//api/piadas
 ```
 3. Consulte o endereço abaixo para obter o retorno json da rota atividades:
 ```bash
-    http://44.206.165.194:8080/api/atividades
+    http://sprint4-equipe1.us-east-1.elasticbeanstalk.com//api/atividades
 ```
 4. Consulte o endereço abaixo para obter a documentação:
 ```bash
-    http://44.206.165.194:8080/api-docs
+    http://sprint4-equipe1.us-east-1.elasticbeanstalk.com//api-docs
 ```
 
 ***
