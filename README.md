@@ -128,7 +128,7 @@ A aplicação terá basicamente duas rotas que irão retornar informações vind
 
 ### Arquitetura na AWS
 
-<p><img src="src\docs\img\diagram-aws.png"></p>
+<p><img src="src\docs\img\diagramEBaws.png"></p>
 
 ***
 
