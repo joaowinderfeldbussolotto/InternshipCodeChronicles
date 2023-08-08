@@ -17,7 +17,7 @@ A aplicação terá basicamente duas rotas que irão retornar informações vind
 
 * NodeJs - Para consumir as duas API's
 * Swagger - Para documentação da API
-* Axios - Para auxilixar no consumo da API
+* Axios - Para auxiliar no consumo da API
 * AWS - Para o armazenamento em nuvem
 * github - Para auxiliar no controle de versão e envio do projeto
 
@@ -220,19 +220,17 @@ Este repositório contém o código-fonte de uma aplicação que roda na AWS usa
 1. **Faça as alterações no código**<br>
    Primeiro, faça as alterações necessárias no código da aplicação no seu ambiente local.
 
-2. **Build da imagem Docker**<br>
-   Após as alterações, você precisa fazer o build da imagem Docker da sua aplicação. Certifique-se de que o arquivo `Dockerfile` está configurado corretamente para sua aplicação.
+2. **Comprimir a pasta do projeto**<br>
+   Após as alterações, você deve comprimir a pasta do projeto. Lembre-se: a pasta node_modules não deve ser inclusa.
 
-3. **Envie a imagem Docker para o ECR**<br>
-   Depois de construir a imagem Docker localmente, envie-a para o Amazon Elastic Container Registry (ECR). Este é o repositório onde a imagem da aplicação será armazenada para uso no EC2.
+3. **Acesse a aplicação no Elastic BeanStalk**<br>
+   Depois de compactar, envie-a para o Amazon Elastic BeanStalk. 
+   Basta clicar em "Upload and deploy" e selecionar o arquivo .zip com o projeto atualizado.
 
-4. **Acesse a instância EC2 via SSH**<br>
-   Após enviar a nova imagem Docker para o Amazon Elastic Container Registry (ECR), você precisará acessar sua instância EC2 via SSH para atualizá-la com a nova imagem.
+    Lembre-se de manter uma coêrencia nas versões por exemplo: projeto-node-v1, projeto-node-v2, etc.
 
-5. **Rebuild da imagem Docker na instância EC2**<br>
-   Uma vez conectado à instância EC2 via SSH, você deve rebuildar o Docker com a nova imagem que foi enviada para o ECR. Isso garantirá que a aplicação esteja usando a versão mais recente da imagem.
-
-6. **Verifique a aplicação**<br>
+    ![Step 3 screenshot](https://images.tango.us/workflows/6d444cf6-7a3c-4959-b26c-55383834d79f/steps/ac98c95f-721b-409b-8ef3-5cbc8d90b4a6/7e18be39-5928-436a-bcf9-aa2f1ddb5060.png?crop=focalpoint&fit=crop&fp-x=0.5373&fp-y=0.4019&fp-z=1.5703&w=1200&mark-w=0.2&mark-pad=0&mark64=aHR0cHM6Ly9pbWFnZXMudGFuZ28udXMvc3RhdGljL21hZGUtd2l0aC10YW5nby13YXRlcm1hcmsucG5n&ar=1920%3A902)
+4. **Verifique a aplicação**<br>
    Após reiniciar a aplicação, verifique se as alterações foram aplicadas corretamente.
 
 Agora sua aplicação foi atualizada na AWS com as alterações mais recentes!
