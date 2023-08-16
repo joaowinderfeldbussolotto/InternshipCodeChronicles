@@ -131,3 +131,13 @@ dist
 
 venv
 __pycache__
+
+**/.ipynb_checkpoints
+**/.idea
+**/__pycache__
+**/.aws-sam
+.DS_Store
+
+**/_build
+*.iml
+tox.ini
