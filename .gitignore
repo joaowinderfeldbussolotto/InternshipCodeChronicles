@@ -141,3 +141,5 @@ __pycache__
 **/_build
 *.iml
 tox.ini
+*.sh
+Dockerrun.aws.json
