@@ -84,10 +84,22 @@ Para fazer consultas, é necessário fazer uma requisição POST no seguinte lin
 1. Nesta rota será efetuado um POST, sendo necessário passar as informações necessárias antes de realizar a chamada.
 ```bash
 {
-	"no_of_adults":  3,
-	"no_of_children":  3,
-	"type_of_meal_plan":  "example",
-	...
+    "no_of_adults": 2,
+    "no_of_children": 0,
+    "no_of_weekend_nights": 1,
+    "no_of_week_nights": 2,
+    "required_car_parking_space": 0,
+    "lead_time": 224,
+    "arrival_year": 2017,
+    "arrival_month": 10,
+    "arrival_date": 2,
+    "repeated_guest": 0,
+    "no_of_special_requests": 0,
+    "no_of_previous_cancellations": 0,
+    "no_of_previous_bookings_not_canceled": 0,
+    "type_of_meal_plan": "Meal Plan 1",
+    "room_type_reserved": "Room_Type 1",
+    "market_segment_type": "Offline"
 }
 ```
 
@@ -103,31 +115,18 @@ Para fazer consultas, é necessário fazer uma requisição POST no seguinte lin
 
 ```
 
-
-
-
 ***
 
 ### Rota → Get /docs
 
-  
-  
-
 1. Essa rota mostra a documentação da API utilizando Swagger
-
-  
 
 <p><img  width= 100%  height=auto  src="https://i.imgur.com/NgMGUxY.png"></p>
 
   ***
   ### Rota → Get /redoc
 
-  
-  
-
 1. Essa rota mostra a documentação da API utilizando o Redocly
-
-  
 
 <p><img  width= 100%  height=auto  src="https://i.imgur.com/cl84vpU.png"></p>
 
@@ -150,6 +149,7 @@ Para fazer consultas, é necessário fazer uma requisição POST no seguinte lin
 		* ```Prediction.py```
 	*  ```services```
 		* ```prediction_service.py```
+	* ```.env```
 	* ```Dockerfile```
 	* ```Dockerrun.aws-example.json```
 	* ```main.py``` 
@@ -194,8 +194,9 @@ Inserir imagem aqui
   
 
 <h2  align="center"> Testando localmente a aplicação </h2>
+[11:28 AM] Joao Victor Winderfeld Bussolotto
 
-  
+![sprint-5-draw-io](https://github.com/Compass-pb-aws-2023-FURG-IFRS-UFFS/sprint-5-pb-aws-furg-ifrs-uffs/assets/57230577/4a4d94c9-4cdd-4bae-883a-7422e70eb448)
 
 ***
 
@@ -203,14 +204,14 @@ Inserir imagem aqui
 
 ### Pré-requisitos
 
-  
+
+* Ter o [Python](https://www.python.org/) instalado
 
 * Ter o [Postman](https://www.postman.com/) instalado
 
 * Conexão com a internet
 
 * Ter o [Git](https://git-scm.com/downloads) instalado
-
 
 1. Clone este repositório para o seu ambiente local:
 
@@ -220,44 +221,39 @@ git  clone  -b  equipe-1  --single-branch  https://github.com/Compass-pb-aws-202
 
 ```
 
-  
+2. Inicie e ative um ambiente virtual com python3
+```
+python -m venv ./../env
+```
+```
+source ./../env/bin/activate
+```
 
-2. Instale o FastApi e o uvicorn
+3. Instale todas as dependências do projeto com o PIP
 ```bash
-pip install fastapi uvicorn
+pip install -r api/requirements.txt 
 ```
   
 
-3. Troque para a pasta "**api**" e execute o arquivo ``main.py``:
-
+4. Execute o arquivo ``main.py``:
 ```bash
-
-cd api
-python .\main.py
-
+python ./api/main.py
 ```
+
 Com o comando executado, o servidor será iniciado:
 <p><img  width= 100%  height=auto  src="https://i.imgur.com/YcmHvAc.png"></p>
 
-  
-
-4. Com o Postman aberto, troque a requisição HTTP para **POST**, e insira o seguinte link:
+5. Com o Postman aberto, troque a requisição HTTP para **POST**, e insira o seguinte link:
 
 ```bash
-
 http://localhost:8000/api/v1/predict
-
 ```
 ou
-  
-
 ```bash
 
 http://127.0.0.1:8000/api/v1/predict
 
 ```
-
-  
 
 5. Em *Headers*, adicione em **Key** o **``Content-Type``** , e em **Value** insira **``application/json``**:
 
@@ -285,26 +281,15 @@ http://127.0.0.1:8000/api/v1/predict
 "booking_status":  "Not_Canceled"
 }
 ```
-<p><img  width= 100%  height=auto  src="https://i.imgur.com/UYGB4A2.png"></p>
-
-7.  Com tudo devidamente configurado, envie a requisição, a resposta esperada deverá ser a seguinte:
+7.  Com tudo devidamente configurado, envie a requisição, a resposta esperada deverá ser similar a seguinte:
 <p><img  width= 100%  height=auto  src="https://i.imgur.com/Soh8fg6.png"></p>
   
-
-
-
-
 ***
-
 <h2  align="center"> Dificuldades Encontradas </h2>
-
-  
-
 ***
 
 Primeiramente ficamos com dificuldade em como separar as atividades, e sobre como deveriamos fazer o trabalho. A solução foi criar uma IAM para fornecer o acesso ao mesmo estúdio do SageMaker para os integrantes do grupo.
 Outro problema que ocorreu foi o pequeno incidente com o AutoPilot da AWS, que acabou gerando uma grande cobrança na AWS da noite para o dia,  e fez com que a equipe se preocupasse com o ocorrido.
-
   
 ***
 <h2  align="center"> Equipe </h2>
