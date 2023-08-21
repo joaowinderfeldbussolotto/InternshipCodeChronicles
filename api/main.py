@@ -6,7 +6,7 @@ app = FastAPI(title = 'API da equipe 1')
 
 @app.get('/')
 def home():
-    return "Hello World!!!"
+    return "Projeto da Equipe 1!!!"
 
 
 app.include_router(api_router, prefix = settings.API_V1_STR)
