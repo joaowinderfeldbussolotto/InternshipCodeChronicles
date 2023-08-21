@@ -1,83 +1,316 @@
-# Avaliação Sprint 5 - Programa de Bolsas Compass UOL / AWS e FURG/IFRS/UFFS
 
-Avaliação da quinta sprint do programa de bolsas Compass UOL para formação em machine learning para AWS.
+<h1  align="center"> Hotel Reservations Price Prediction </h1>
+
+ O objetivo deste projeto era criar uma API com uma rota para realizar inferências usando um modelo treinado no Amazon SageMaker. O seguinte [dataset](https://www.kaggle.com/datasets/ahsan81/hotel-reservations-classification-dataset) foi utilizado para fazer o treino do modelo no SageMaker.
+Para fazer consultas, é necessário fazer uma requisição POST no seguinte link:   http://hotel-reservations-price-ml-model-prediction.us-east-1.elasticbeanstalk.com/api/v1/predict
+
+
 
 ***
 
-## Execução
+<h2  align="center"> Tecnologias Utilizadas </h2>
 
-1 - Treinar o modelo utilizando Sage Maker, conforme instruções a seguir, e fazer o salvamento do modelo para o S3.
+***
 
-2 - Criar um ambiente Docker no AWS Elastic Beanstalk.
+<p  align="center">
 
-3 - Desenvolver um serviço em python (API), utilizando algum framework http (Flask, FastApi...), que deve carregar o modelo treinado do S3 e expor um endpoint para realizar a inferência. O enpoint deve ser um POST com uma rota /api/v1/predict e receber um JSON no corpo da requisição seguindo o exemplo:
 
-```json
+<img  height="45"  src="https://github.com/devicons/devicon/blob/master/icons/python/python-original.svg" alt='Python'>
+
+<img  height="45"  src="https://github.com/devicons/devicon/blob/master/icons/fastapi/fastapi-original-wordmark.svg" alt='FastApi'>
+
+<img  height="45"  src="https://github.com/devicons/devicon/blob/master/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg" alt='AWS'>
+
+<img  height="45"  src="https://github.com/devicons/devicon/blob/master/icons/docker/docker-original.svg" alt='Docker'>
+
+<img  height="45"  src="https://github.com/devicons/devicon/blob/master/icons/github/github-original.svg" alt='GitHub'>
+
+<img  height="45"  src="https://github.com/devicons/devicon/blob/master/icons/trello/trello-plain-wordmark.svg" alt='Trello'>
+
+</p>
+
+  
+* Python - Para o desenvolvimento da API.
+
+* FastApi - Para expor o endpoint para inferência.
+
+* AWS - Para o treinamento no modelo no SageMaker, e armazenamento com S3 e Elastic BeansTalk.
+
+* Docker - Para a criação do ambiente no AWS Elastic Beanstalk.
+
+* GitHub - Para auxiliar no controle de versão e envio do projeto.
+
+* Trello - Para divisão e acompanhamento das tarefas.
+  
+
+***
+
+  
+
+<h2  align="center"> Execução (Código Fonte) </h2>
+
+  
+
+***
+
+  
+
+### Rota → Get /
+
+  
+
+1. Nesta rota será efetuado um get na raiz do projeto.
+
+  
+
+2. O retorno desta API deverá ter um texto simples.
+
+  
+
+3. Status code para sucesso da requisição será `200`
+
+  
+
+<p><img  width= 100%  height=auto  src="https://i.imgur.com/thrUHar.png"></p>
+
+  
+
+***
+
+### Rota → POST /api/v1/predict
+
+  
+
+1. Nesta rota será efetuado um POST, sendo necessário passar as informações necessárias antes de realizar a chamada.
+```bash
 {
-    "no_of_adults": 3,
-    "no_of_children": 3,
-    "type_of_meal_plan": "example"
-    ...
+	"no_of_adults":  3,
+	"no_of_children":  3,
+	"type_of_meal_plan":  "example",
+	...
 }
 ```
 
-A resposta deve seguir este formato:
+2. O retorno da API  deverá  ser a seguinte:
+
+  
 
 ```json
+
 {
-  "result": 1
+"result":  1
 }
+
 ```
 
-4 - Realizar o Deploy do serviço no Elastic Beanstalk.
 
-![aws schema](aws_schema.png)
 
-***
-
-## Construção do Modelo
-
-O Hotel Reservations Dataset (<https://www.kaggle.com/datasets/ahsan81/hotel-reservations-classification-dataset>) é uma base de dados que trata de informações sobre reservas em hotéis.
-
-Iremos utilizar esse dataset para classificar os dados por faixa de preços de acordo com as informações encontradas em suas colunas (usem o que vocês acharem que faz sentido para análise).
-
-**Queremos saber como cada reserva (cada linha do dataset) se encaixa em qual faixa de preço.** Para isso, a equipe **deve criar uma nova coluna** chamada **label_avg_price_per_room**, que servirá como label para nossa classificação. Essa nova coluna deverá conter número 1 quando a coluna *avg_price_per_room* tiver valor menor ou igual a 85, número 2 quando a coluna *avg_price_per_room* tiver valor maior que 85 e menor que 115 e o valor 3 se a coluna *avg_price_per_room* tiver valor maior ou igual a 115.
-
-Vocês devem então **excluir a coluna avg_price_per_room** e criar um modelo que consiga classificar os dados com base na nova coluna *label_avg_price_per_room*.
-
-Será necessário explicar o porquê da escolha do modelo, como ele funciona. Também será avaliada a taxa de assertividade do modelo.
-
-![dataset schema](dataset_schema.png)
 
 ***
 
-## O que será avaliado
+### Rota → Get /docs
 
-- Projeto em produção na AWS Elastic Beanstalk
-- Código Python utilizado no Sagemaker (notebook python)
-- Código do Dockerfile
-- Sobre o modelo
-  - Divisão dos dados para treino e teste
-  - Taxa de assertividade aceitável (se o modelo está classificando corretamente)
-  - Entendimento da equipe sobre o modelo utilizado (saber explicar o que foi feito)
-  - Mostrar resposta do modelo para classificação
-- Organização geral do código fonte
-  - Estrutura de pastas
-  - Divisão de responsabilidades em arquivos/pastas distintos
-  - Otimização do código fonte (evitar duplicações de código)
-- Objetividade do README.md
+  
+  
+
+1. Essa rota mostra a documentação da API utilizando Swagger
+
+  
+
+<p><img  width= 100%  height=auto  src="https://i.imgur.com/NgMGUxY.png"></p>
+
+  ***
+  ### Rota → Get /redoc
+
+  
+  
+
+1. Essa rota mostra a documentação da API utilizando o Redocly
+
+  
+
+<p><img  width= 100%  height=auto  src="https://i.imgur.com/cl84vpU.png"></p>
 
 ***
 
-## Entrega
+<h2  align="center"> Arquitetura </h2>
 
-- Aceitar o convite do repositório da sprint-5-pb-aws-furg-ifrs-uffs;
-- **O trabalho deve ser feito em grupos de três ou quatro pessoas**;
-  - **Evitar repetições de grupos da sprint anterior**;
-- Criar uma branch no repositório com o formato grupo-número (Exemplo: grupo-1);
-- Subir o trabalho na branch com um Readme.md:
-  - documentar detalhes sobre como a avaliação foi desenvolvida;
-  - dificuldades conhecidas;
-  - como utilizar o sistema;
-  - 🔨 código fonte desenvolvido (Sugestão: pasta `src`);
-- O prazo de entrega é até às 12h do dia 21/08/2023 no repositório do github ([https://github.com/Compass-pb-aws-2023-FURG-IFRS-UFFS/sprint-4-pb-aws-furg-ifrs-uffs](https://github.com/Compass-pb-aws-2023-FURG-IFRS-UFFS/sprint-4-pb-aws-furg-ifrs-uffs)).
+
+***
+
+*  ```api```
+	*  ```api/v1```
+		*  ```endpoints```
+			* ```predict.py```
+		* 	```api.py```
+	*  ```core```
+		* ```config.py```
+	*  ```schemas```
+		* ```Booking.py```
+		* ```Prediction.py```
+	*  ```services```
+		* ```prediction_service.py```
+	* ```Dockerfile```
+	* ```Dockerrun.aws-example.json```
+	* ```main.py``` 
+	* ```requirements.txt```
+*  ```notebook```
+	*  ```datasets```
+		* ```datasets-para-autopilot```
+			* ```mod-hotel_res-red.csv```
+			* ```mod-hotel_res.csv```
+		* ```xgboost```
+			* ```hotelrooms_test_xgboost.csv```
+			* ```hotelrooms_train_xgboost.csv```
+		* ```Hotel Reservations.csv```
+	* ```Untitled.ipynb```
+	* ```xgboost-census.ipynb```
+	* ```xgboost-model.ipynb``` 
+
+
+
+  
+
+***
+
+<h2  align="center"> AWS </h2>
+
+  
+
+***
+
+  
+
+### Arquitetura na AWS
+
+  
+
+Inserir imagem aqui
+
+  
+
+***
+
+  
+
+<h2  align="center"> Testando localmente a aplicação </h2>
+
+  
+
+***
+
+  
+
+### Pré-requisitos
+
+  
+
+* Ter o [Postman](https://www.postman.com/) instalado
+
+* Conexão com a internet
+
+* Ter o [Git](https://git-scm.com/downloads) instalado
+
+
+1. Clone este repositório para o seu ambiente local:
+
+```bash
+
+git  clone  -b  equipe-1  --single-branch  https://github.com/Compass-pb-aws-2023-FURG-IFRS-UFFS/sprint-5-pb-aws-furg-ifrs-uffs/tree/equipe-1 && cd  sprint-5-pb-aws-furg-ifrs-uffs
+
+```
+
+  
+
+2. Instale o FastApi e o uvicorn
+```bash
+pip install fastapi uvicorn
+```
+  
+
+3. Troque para a pasta "**api**" e execute o arquivo ``main.py``:
+
+```bash
+
+cd api
+python .\main.py
+
+```
+Com o comando executado, o servidor será iniciado:
+<p><img  width= 100%  height=auto  src="https://i.imgur.com/YcmHvAc.png"></p>
+
+  
+
+4. Com o Postman aberto, troque a requisição HTTP para **POST**, e insira o seguinte link:
+
+```bash
+
+http://localhost:8000/api/v1/predict
+
+```
+ou
+  
+
+```bash
+
+http://127.0.0.1:8000/api/v1/predict
+
+```
+
+  
+
+5. Em *Headers*, adicione em **Key** o **``Content-Type``** , e em **Value** insira **``application/json``**:
+
+ 
+
+<p><img  width= 100%  height=auto  src="https://i.imgur.com/k5XDRpC.png"></p>
+
+6. Em *Body* insira as informações necessárias para fazer a requisição, como no exemplo a seguir: 
+```bash
+{
+"no_of_adults":  3,
+"no_of_children":  3,
+"type_of_meal_plan":  "example",
+"no_of_weekend_nights":  1,
+"no_of_week_nights":  0,
+"required_car_parking_space":  1,
+"room_type_reserved":  "Room_Type 1",
+"lead_time":  5,
+"arrival_year":  2022,
+"arrival_month":  7,
+"arrival_date":  6,
+"market_segment_type":  "Online",
+"repeated_guest":  1,
+"no_of_special_requests":  0,
+"booking_status":  "Not_Canceled"
+}
+```
+<p><img  width= 100%  height=auto  src="https://i.imgur.com/UYGB4A2.png"></p>
+
+7.  Com tudo devidamente configurado, envie a requisição, a resposta esperada deverá ser a seguinte:
+<p><img  width= 100%  height=auto  src="https://i.imgur.com/Soh8fg6.png"></p>
+  
+
+
+
+
+***
+
+<h2  align="center"> Dificuldades Encontradas </h2>
+
+  
+
+***
+
+Primeiramente ficamos com dificuldade em como separar as atividades, e sobre como deveriamos fazer o trabalho. A solução foi criar uma IAM para fornecer o acesso ao mesmo estúdio do SageMaker para os integrantes do grupo.
+Outro problema que ocorreu foi o pequeno incidente com o AutoPilot da AWS, que acabou gerando uma grande cobrança na AWS da noite para o dia,  e fez com que a equipe se preocupasse com o ocorrido.
+
+  
+***
+<h2  align="center"> Equipe </h2>
+
+<center>
+
+[João Victor Winderfeld](https://github.com/joaowinderfeldbussolotto) - [Luiz Paulo Grafetti Terres](https://github.com/luizpgt) - [Paulo Sergio Nunes](https://github.com/Paulocc) - [Felipe Marzani](https://github.com/FeMarzani)
+
+</center>
