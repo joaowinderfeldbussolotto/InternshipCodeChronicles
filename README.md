@@ -1,10 +1,20 @@
 
 <h1  align="center"> Hotel Reservations Price Prediction </h1>
 
- O objetivo deste projeto era criar uma API com uma rota para realizar inferências usando um modelo treinado no Amazon SageMaker. O seguinte [dataset](https://www.kaggle.com/datasets/ahsan81/hotel-reservations-classification-dataset) foi utilizado para fazer o treino do modelo no SageMaker.
-Para fazer consultas, é necessário fazer uma requisição POST no seguinte link:   http://hotel-reservations-price-ml-model-prediction.us-east-1.elasticbeanstalk.com/api/v1/predict
+ O objetivo deste projeto: criar uma API com uma rota para realizar inferências usando um modelo treinado no Amazon SageMaker.
+ 
+ O seguinte [dataset](https://www.kaggle.com/datasets/ahsan81/hotel-reservations-classification-dataset) foi utilizado para fazer o treino do modelo no SageMaker.
 
+Para fazer consultas,usa-se uma requisição POST no seguinte link:
 
+http://hotel-reservations-price-ml-model-prediction.us-east-1.elasticbeanstalk.com/api/v1/predict
+
+Ao entrar a lista de valores obrigatório de entrada, contendo informações sobre uma reserva de quarto de hotel, a API retorna a previsão contendo a classificação (faixa de preço) da reserva.
+| Classe |  Faixa de preço! |
+|:--------:|:-----------:|
+| 1 | preço <= 85 | 
+| 2 | 85 < preço < 115 |
+| 3 | preço >= 115 |
 
 ***
 
@@ -45,31 +55,17 @@ Para fazer consultas, é necessário fazer uma requisição POST no seguinte lin
 
 ***
 
+<h2  align="center"> Funcionamento </h2>
   
-
-<h2  align="center"> Execução (Código Fonte) </h2>
-
-  
-
 ***
-
-  
 
 ### Rota → Get /
 
-  
-
 1. Nesta rota será efetuado um get na raiz do projeto.
-
-  
 
 2. O retorno desta API deverá ter um texto simples.
 
-  
-
 3. Status code para sucesso da requisição será `200`
-
-  
 
 <p><img  width= 100%  height=auto  src="https://i.imgur.com/thrUHar.png"></p>
 
@@ -79,10 +75,8 @@ Para fazer consultas, é necessário fazer uma requisição POST no seguinte lin
 
 ### Rota → POST /api/v1/predict
 
-  
-
-1. Nesta rota será efetuado um POST, sendo necessário passar as informações necessárias antes de realizar a chamada.
-```bash
+1. Nesta rota será efetuado um POST, sendo necessário passar as informações no body da requisição. Um exemplo de entrada é: 
+```json
 {
     "no_of_adults": 2,
     "no_of_children": 0,
@@ -102,17 +96,13 @@ Para fazer consultas, é necessário fazer uma requisição POST no seguinte lin
     "market_segment_type": "Offline"
 }
 ```
-
-2. O retorno da API  deverá  ser a seguinte:
-
-  
+2. O retorno da API  deverá  ser no seguinte formato:
 
 ```json
 
 {
 "result":  1
 }
-
 ```
 
 ***
@@ -123,17 +113,9 @@ Para fazer consultas, é necessário fazer uma requisição POST no seguinte lin
 
 <p><img  width= 100%  height=auto  src="https://i.imgur.com/NgMGUxY.png"></p>
 
-  ***
-  ### Rota → Get /redoc
-
-1. Essa rota mostra a documentação da API utilizando o Redocly
-
-<p><img  width= 100%  height=auto  src="https://i.imgur.com/cl84vpU.png"></p>
-
 ***
 
-<h2  align="center"> Arquitetura </h2>
-
+<h2  align="center"> Estrutura de pastas </h2>
 
 ***
 
@@ -141,7 +123,7 @@ Para fazer consultas, é necessário fazer uma requisição POST no seguinte lin
 	*  ```api/v1```
 		*  ```endpoints```
 			* ```predict.py```
-		* 	```api.py```
+		* ```api.py```
 	*  ```core```
 		* ```config.py```
 	*  ```schemas```
@@ -149,6 +131,7 @@ Para fazer consultas, é necessário fazer uma requisição POST no seguinte lin
 		* ```Prediction.py```
 	*  ```services```
 		* ```prediction_service.py```
+		* ```booking_formatter.py```
 	* ```.env```
 	* ```Dockerfile```
 	* ```Dockerrun.aws-example.json```
@@ -156,15 +139,10 @@ Para fazer consultas, é necessário fazer uma requisição POST no seguinte lin
 	* ```requirements.txt```
 *  ```notebook```
 	*  ```datasets```
-		* ```datasets-para-autopilot```
-			* ```mod-hotel_res-red.csv```
-			* ```mod-hotel_res.csv```
 		* ```xgboost```
 			* ```hotelrooms_test_xgboost.csv```
 			* ```hotelrooms_train_xgboost.csv```
 		* ```Hotel Reservations.csv```
-	* ```Untitled.ipynb```
-	* ```xgboost-census.ipynb```
 	* ```xgboost-model.ipynb``` 
 
 
@@ -184,19 +162,11 @@ Para fazer consultas, é necessário fazer uma requisição POST no seguinte lin
 ### Arquitetura na AWS
 
   
-
-Inserir imagem aqui
-
-  
+![sprint-5-draw-io](https://github.com/Compass-pb-aws-2023-FURG-IFRS-UFFS/sprint-5-pb-aws-furg-ifrs-uffs/assets/57230577/4a4d94c9-4cdd-4bae-883a-7422e70eb448)
 
 ***
 
-  
-
 <h2  align="center"> Testando localmente a aplicação </h2>
-[11:28 AM] Joao Victor Winderfeld Bussolotto
-
-![sprint-5-draw-io](https://github.com/Compass-pb-aws-2023-FURG-IFRS-UFFS/sprint-5-pb-aws-furg-ifrs-uffs/assets/57230577/4a4d94c9-4cdd-4bae-883a-7422e70eb448)
 
 ***
 
@@ -217,8 +187,7 @@ Inserir imagem aqui
 
 ```bash
 
-git  clone  -b  equipe-1  --single-branch  https://github.com/Compass-pb-aws-2023-FURG-IFRS-UFFS/sprint-5-pb-aws-furg-ifrs-uffs/tree/equipe-1 && cd  sprint-5-pb-aws-furg-ifrs-uffs
-
+git clone -b equipe-1 --single-branch https://github.com/Compass-pb-aws-2023-FURG-IFRS-UFFS/sprint-5-pb-aws-furg-ifrs-uffs.git && cd  sprint-5-pb-aws-furg-ifrs-uffs
 ```
 
 2. Inicie e ative um ambiente virtual com python3
@@ -262,7 +231,7 @@ http://127.0.0.1:8000/api/v1/predict
 <p><img  width= 100%  height=auto  src="https://i.imgur.com/k5XDRpC.png"></p>
 
 6. Em *Body* insira as informações necessárias para fazer a requisição, como no exemplo a seguir: 
-```bash
+```json
 {
 "no_of_adults":  3,
 "no_of_children":  3,
@@ -284,6 +253,41 @@ http://127.0.0.1:8000/api/v1/predict
 7.  Com tudo devidamente configurado, envie a requisição, a resposta esperada deverá ser similar a seguinte:
 <p><img  width= 100%  height=auto  src="https://i.imgur.com/Soh8fg6.png"></p>
   
+***
+<h2  align="center"> Como alterar e atualizar Aplicação na AWS </h2>
+
+***
+
+**Pra fazer alterações:**
+
+- Buildar nova imagem no ECR 
+```bash
+aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin SEU_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com
+docker build -t sprint5-api .
+docker tag sprint5-api:latest URI-DO-REPOSITORIO-ECR
+docker push URI-DO-REPOSITORIO-ECR:latest
+```
+- Criar nova versão da aplicação 
+```bash
+aws elasticbeanstalk create-application-version \
+
+  --application-name NOME_DA_APLICACAO \
+
+  --version-label VERSAO \
+
+  --source-bundle S3Bucket=NOME_DA_BUCKET,S3Key=Dockerrun.aws.json
+
+```
+- Atualizar o ambiente
+```bash
+aws elasticbeanstalk update-environment \
+
+  --environment-name PNOME_DA_ENV \
+
+  --version-label VERSAO
+```
+- Pronto!
+
 ***
 <h2  align="center"> Dificuldades Encontradas </h2>
 ***
