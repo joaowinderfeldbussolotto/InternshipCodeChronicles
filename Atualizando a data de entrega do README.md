@@ -263,4 +263,4 @@ Dessa maneira essa será a arquitetura a ser implantada:
   - dificuldades conhecidas
   - como utilizar o sistema
   - 🔨 código fonte desenvolvido (Sugestão: pasta `src`)
-- O prazo de entrega é até às 12h do dia 28/08/2023 no repositório do github ([https://github.com/Compass-pb-aws-2023-FURG-IFRS-UFFS/sprint-6-pb-aws-furg-ifrs-uffs](https://github.com/Compass-pb-aws-2023-FURG-IFRS-UFFS/sprint-6-pb-aws-furg-ifrs-uffs)).
+- O prazo de entrega é até às 12h do dia 04/09/2023 no repositório do github ([https://github.com/Compass-pb-aws-2023-FURG-IFRS-UFFS/sprint-6-pb-aws-furg-ifrs-uffs](https://github.com/Compass-pb-aws-2023-FURG-IFRS-UFFS/sprint-6-pb-aws-furg-ifrs-uffs)).
