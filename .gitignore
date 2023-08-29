@@ -169,3 +169,8 @@ build/
 *.db
 *.sqlite3
 *.bak
+
+
+
+test.py
+*.mp3
