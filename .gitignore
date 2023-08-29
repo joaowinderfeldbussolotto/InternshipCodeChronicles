@@ -128,3 +128,44 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+
+
+# Compiled Python files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+env/
+*.env
+*.venv
+
+# IDE or editor-specific files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Dependency files
+*.egg-info/
+dist/
+build/
+
+# Local configuration files
+*.config
+*.ini
+*.log
+
+# Compiled extensions
+*.so
+*.dll
+
+# Miscellaneous
+*.pyproj
+*.pydevproject
+*.db
+*.sqlite3
+*.bak

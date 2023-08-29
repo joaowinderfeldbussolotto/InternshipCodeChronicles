@@ -7,20 +7,21 @@ provider:
 
 functions:
   health:
-    handler: handler.health
+    handler: routes/health.health
     events:
       - httpApi:
           path: /
           method: get
   v1Description:
-    handler: handler.v1_description
+    handler: routes/v1.v1_description
     events:
       - httpApi:
           path: /v1
           method: get
   v2Description:
-    handler: handler.v2_description
+    handler: routes/v2.v2_description
     events:
       - httpApi:
           path: /v2
           method: get
+      
