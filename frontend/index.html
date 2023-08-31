@@ -1,11 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
+    <header>
+        <h1>Esse é o app da equipe-5 😀</h1>
+    </header>
+
+    <main>
+        <div class="main-content">
+            <form id="form" method="post">
+                <label for="phrase">Frase desejada:</label>
+                <input type="text" id="phrase" name="phrase">
+                <input type="submit" value="Submit">
+            </form>
+        
+            <button onclick="handleAction('API_URL_AQUI')">v1/tts</button>
+            <button onclick="handleAction('API_URL_AQUI')">v2/tts</button>
+            <button onclick="handleAction('API_URL_AQUI')">v3/tts</button>
+        </div>
+    </main>
+    <footer>
+        <h2><p>&copy; 2023 Equipe-5. Todos os direitos reservados.</p></h2>
+    </footer>
     
+
+    <script src="./index.js"></script>
+    <script>
+
+    </script>
 </body>
+
 </html>
