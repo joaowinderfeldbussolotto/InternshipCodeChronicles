@@ -1,6 +1,6 @@
-import json
 from controllers.tts_handler import handleTTS
 from utils import createResponseData
+from services.DataBaseService import checkInDatabase
 def v1_description(event, context):
     body = {
         "message": "TTS api version 1."
