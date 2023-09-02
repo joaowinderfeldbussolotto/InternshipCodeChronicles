@@ -59,7 +59,7 @@ resources:
             KeyType: HASH
         AttributeDefinitions:
           - AttributeName: id
-            AttributeType: N
+            AttributeType: S
 
 custom:
   ${file(./env.yml)}
