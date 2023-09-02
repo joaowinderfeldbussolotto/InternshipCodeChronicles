@@ -1,5 +1,4 @@
-import json
-
+from utils import createResponseData
 
 
 def health(event, context):
@@ -8,7 +7,5 @@ def health(event, context):
         "input": event
     }
 
-    response = {"statusCode": 200, "body": json.dumps(body)}
-
-    return response
+    return createResponseData(200, body)
 

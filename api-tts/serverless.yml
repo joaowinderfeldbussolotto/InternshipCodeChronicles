@@ -83,7 +83,12 @@ functions:
       - httpApi:
           path: /v2
           method: get
-
+  v1TTS: 
+    handler: routes/v1.post_v1_tts
+    events:
+      - httpApi:
+          path: /v1/tts
+          method: post  
   v2TTS: 
     handler: routes/v2.post_v2_tts
     events:
