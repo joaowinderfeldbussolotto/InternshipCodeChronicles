@@ -38,5 +38,9 @@ def createBody(received_phrase, url_to_audio, unique_id=None):
 def createResponseData(statusCode, body):
     return {
         'statusCode': statusCode,
+        "headers": {
+            "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json"
+        },
         'body': json.dumps(body)
     }
