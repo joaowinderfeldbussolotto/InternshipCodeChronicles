@@ -95,6 +95,12 @@ functions:
       - httpApi:
           path: /v2/tts
           method: post  
+  v3TTS: 
+    handler: routes/v3.post_v3_tts
+    events:
+      - httpApi:
+          path: /v3/tts
+          method: post
       
 
 plugins:
