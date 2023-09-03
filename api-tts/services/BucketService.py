@@ -12,8 +12,8 @@ def get_file_url(bucket_name, key):
 def upload_to_bucket(file, key = None, bucket_name = settings.BUCKET_NAME):
     
     if not key:
-        key = f'audio-file-{getFormattedDateTime()}.mp3'
-        
+        key = f'audio-file-{getFormattedDateTime().replace(" ", "_")}.mp3'
+    
     response = s3_client.put_object(
         Bucket=bucket_name,
         Key=key,

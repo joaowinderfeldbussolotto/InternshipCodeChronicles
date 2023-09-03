@@ -1,11 +1,13 @@
 from datetime import datetime
 import hashlib
 import json
+import pytz
 
 
 
 def getFormattedDateTime():
-    return datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    brazil_timezone = pytz.timezone('America/Sao_Paulo')
+    return datetime.now(brazil_timezone).strftime("%Y-%m-%d %H-%M-%S")
 
 
 def create_hash(text):
