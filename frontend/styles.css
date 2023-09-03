@@ -48,6 +48,21 @@ main {
   border: solid 4px;
   border-radius: 50px 0px 50px 0px;
 }
+pre {
+  width: 50ch;
+}
+.main-content.output {
+  display: none;
+}
+#jsonContainer {
+  /* font-weight: bold; */
+  font-size: 22px;
+  max-width: 500ch; /* Largura máxima do contêiner */
+  padding: 10px; /* Espaçamento interno */
+  white-space: pre-wrap; /* Quebra de linha automática para manter o JSON formatado */
+  word-wrap: break-word;
+  font-family: monospace; /* Usar uma fonte monoespaçada para manter a formatação */
+}
 input {
   padding: 10px;
   font-size: 20px;
@@ -88,4 +103,9 @@ button:hover {
 }
 input[type='submit']:hover{
   background: #24ab3b;
+}
+
+.try-again {
+  visibility: hidden;
+  cursor: pointer;
 }
