@@ -15,6 +15,7 @@ def handleTTS(event, return_id, save_db, check_db=None):
              item_exists = checkInDatabase(hash_id)
         if item_exists:
             body = item_exists
+            return createResponseData(200, body)
         else:
           audio = generate_audio(phrase)
           audio_url = upload_to_bucket(audio)
@@ -29,5 +30,6 @@ def handleTTS(event, return_id, save_db, check_db=None):
 
         return createResponseData(200, body)
 
-    except Exception:
+    except Exception as e:
+        print(e)
         return createResponseData(500, {"error": "Internal Server error."})

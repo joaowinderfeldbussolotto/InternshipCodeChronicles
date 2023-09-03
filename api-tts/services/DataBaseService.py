@@ -12,7 +12,7 @@ def saveToDatabase(item, table=database_table):
 
 
 def checkInDatabase(id, table=database_table):
-    response = table.get_item(Key={'id': id})
+    response = table.get_item(Key={'unique_id': id})
     if 'Item' in response:
         return response['Item']
     return False

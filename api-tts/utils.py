@@ -7,7 +7,7 @@ import pytz
 
 def getFormattedDateTime():
     brazil_timezone = pytz.timezone('America/Sao_Paulo')
-    return datetime.now(brazil_timezone).strftime("%Y-%m-%d %H-%M-%S")
+    return datetime.now(brazil_timezone).strftime("%Y-%m-%d %H:%M:%S")
 
 
 def create_hash(text):
@@ -18,9 +18,10 @@ def create_hash(text):
 
 def createItem(hash_id, audio_url, phrase):
     return {
-        'id': hash_id,
-        's3_url': audio_url,
-        'phrase': phrase
+        'unique_id': hash_id,
+        'url_to_audio': audio_url,
+        'received_phrase': phrase,
+        'created_audio': getFormattedDateTime()
     }
 
 
