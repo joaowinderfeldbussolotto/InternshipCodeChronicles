@@ -31,5 +31,4 @@ def handleTTS(event, return_id, save_db, check_db=None):
         return createResponseData(200, body)
 
     except Exception as e:
-        print(e)
-        return createResponseData(500, {"error": "Internal Server error."})
+        return createResponseData(500, {"error": "Internal Server error"})
