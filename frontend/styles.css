@@ -37,7 +37,7 @@ main {
 .main-content {
   font-size: 20px;
   background: var(--main-content-color);
-  margin-top: 100px;
+  margin-block: 40px;
   padding: 50px;
   display: flex;
   gap: 15px;
@@ -108,4 +108,11 @@ input[type='submit']:hover{
 .try-again {
   visibility: hidden;
   cursor: pointer;
+}
+.audio {
+  cursor: pointer;
+  border: 1px solid;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  visibility: hidden;
 }
