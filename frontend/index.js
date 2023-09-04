@@ -16,6 +16,11 @@ let url = ""
 tryAgain.addEventListener('click', handleState)
 submit.addEventListener('click', handleForm)
 
+/**
+* Handles the form submit. This is the function that gets called when the user clicks on the submit button
+* 
+* @param e - The event that was
+*/
 async function handleForm(e) {
   e.preventDefault()
   if (phraseInput.value !== "" && url !== "") {
@@ -30,10 +35,23 @@ async function handleForm(e) {
   }
 }
 
+/**
+* Sets the url to the TTS page. This is called by the constructor and should not be called directly
+* 
+* @param param - The parameter passed to the
+*/
 function handleURL(param) {
   url = `${BASE_URL}${param}/tts`
 }
 
+/**
+* Fetch data from a URL. This is a wrapper around fetch (... OPTIONS ) to allow us to pass phrase as a parameter
+* 
+* @param url - The URL to fetch from
+* @param phrase - The phrase to send to the API. This should be a string
+* 
+* @return { Promise } The data as a JSON string or an error if something goes wrong. It will be formatted as JSON
+*/
 async function fetchData(url, phrase) {
   const OPTIONS = {
     method: 'POST',
@@ -51,6 +69,11 @@ async function fetchData(url, phrase) {
   }
 }
 
+/**
+* Updates the display state of the input and output. This is called by handleStateChange and should not be called directly.
+* 
+* @param audio - The audio that is being played or null if none
+*/
 function handleState(audio) {
 
   if (getComputedStyle(outputContent).display == 'none') {
@@ -72,6 +95,13 @@ function handleState(audio) {
   }
 }
 
+/**
+* Creates and returns an audio element. This element is used to play audio. The source of the audio is specified by the url_to_audio parameter.
+* 
+* @param url_to_audio - The url of the audio.
+* 
+* @return { Element } The audio element that can be added to the document. Note that the audio element has a type attribute
+*/
 function createAudio(url_to_audio) {
   const audio = document.createElement('audio')
   audio.setAttribute('controls', 'controls')
