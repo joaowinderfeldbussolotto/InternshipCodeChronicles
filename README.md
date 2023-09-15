@@ -313,4 +313,4 @@ Exemplos e docs de referência:
   - Documentar detalhes sobre como a avaliação foi desenvolvida;
   - Dificuldades conhecidas;
   - Como utilizar o sistema;
-- O prazo de entrega é até às 12h do dia 25/09/2023 no repositório do github ([https://github.com/Compass-pb-aws-2023-FURG-IFRS-UFFS/sprint-8-pb-aws-furg-ifrs-uffs](https://github.com/Compass-pb-aws-2023-FURG-IFRS-UFFS/sprint-8-pb-aws-furg-ifrs-uffs)).
+- O prazo de entrega é até às 12h do dia 02/10/2023 no repositório do github ([https://github.com/Compass-pb-aws-2023-FURG-IFRS-UFFS/sprint-8-pb-aws-furg-ifrs-uffs](https://github.com/Compass-pb-aws-2023-FURG-IFRS-UFFS/sprint-8-pb-aws-furg-ifrs-uffs)).
