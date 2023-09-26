@@ -45,9 +45,19 @@ functions:
       - httpApi:
           path: /v1
           method: get
+  v1Vision:
+    handler: routes/v1/v1_vision.post_v1_vision
+    events:
+      - httpApi:
+          path: /v1/vision
+          method: post
   v2Description:
     handler: routes/v2/v2_description.v2_description
     events:
       - httpApi:
           path: /v2
           method: get
+
+plugins:
+  - serverless-offline
+  - serverless-python-requirements

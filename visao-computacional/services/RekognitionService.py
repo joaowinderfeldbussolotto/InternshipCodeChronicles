@@ -50,4 +50,4 @@ def detect_faces(imageName, bucketName=settings.BUCKET_NAME):
       Attributes=['ALL'])
     return response
   except Exception as e:
-     return str(e)
+    return str(e)
