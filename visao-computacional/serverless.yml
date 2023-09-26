@@ -40,13 +40,13 @@ functions:
           path: /
           method: get
   v1Description:
-    handler: routes/v1.v1_description
+    handler: routes/v1/v1_description.v1_description
     events:
       - httpApi:
           path: /v1
           method: get
   v2Description:
-    handler: routes/v2.v2_description
+    handler: routes/v2/v2_description.v2_description
     events:
       - httpApi:
           path: /v2
