@@ -1,6 +1,6 @@
-from utils import createResponseData, create_body
-from services.RekognitionService import detect_labels
-from services.S3Service import created_image_datetime
+from utils import create_response_data, create_body
+from services.rekognition_service import detect_labels
+from services.s3_service import created_image_datetime
 import json
 
 
@@ -22,7 +22,6 @@ def handle_v1_vision(event):
 
       # Get labels from image
       detectLabelsResponse = detect_labels(imageName, bucket)
-
       # Get the datetime when the image was created
       createdImageResponse = created_image_datetime(imageName, bucket)
       
@@ -31,10 +30,10 @@ def handle_v1_vision(event):
 
       responseBody = create_body(bucket, imageName, createdImageResponse, labels, 'labels')
 
-      # Log of results in CloudWatch
-      print(responseBody)
+      # detectLabelsResponse log for CloudWatch
+      print(detectLabelsResponse)
 
       # Return the answer
-      return createResponseData(200, responseBody)
+      return create_response_data(200, responseBody)
     except Exception as e:
-        return createResponseData(500, {"error": e})
+        return create_response_data(500, {"error": e})

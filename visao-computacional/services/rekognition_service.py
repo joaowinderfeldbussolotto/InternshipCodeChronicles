@@ -1,7 +1,7 @@
 import boto3
 from core.config import settings
-rekognition_client = boto3.client('rekognition', region_name='us-east-1')
 
+rekognition_client = boto3.client('rekognition')
 
 def detect_labels(imageName, bucketName=settings.BUCKET_NAME):
     """
@@ -12,6 +12,8 @@ def detect_labels(imageName, bucketName=settings.BUCKET_NAME):
 
      @return dict: A dictionary containing the detected labels and their confidence scores.
     """
+    if bucketName is None:
+     bucketName = settings.BUCKET_NAME
     try:
         response = rekognition_client.detect_labels(
             Image={
@@ -21,7 +23,7 @@ def detect_labels(imageName, bucketName=settings.BUCKET_NAME):
                 }
             },
             MaxLabels=10,
-            MinConfidence=60.0
+            MinConfidence=85.0
         )
         return response
     except Exception as e:
@@ -38,7 +40,8 @@ def detect_faces(imageName, bucketName=settings.BUCKET_NAME):
   
   @return dict: A dictionary containing information about the detected faces.
   """
-
+  if bucketName is None:
+     bucketName = settings.BUCKET_NAME
   try:
     response = rekognition_client.detect_faces(
       Image={

@@ -1,8 +1,8 @@
-from utils import createResponseData
+from utils import create_response_data
 
 
 def v1_description(event, context):
     body = {
         "message": "VISION api version 1."
     }
-    return createResponseData(200, body)
+    return create_response_data(200, body)
