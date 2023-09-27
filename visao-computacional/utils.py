@@ -17,7 +17,7 @@ def createResponseData(statusCode, body):
         'body': json.dumps(body)
     }
 
-def create_body(bucket, imageName, createdImageDateTime, receivedBody, keyType):
+def create_body(bucket, imageName, createdImageDateTime, receivedBody, keyType = 'labels'):
     """
     Creates a response body based on the provided parameters.
 
@@ -41,9 +41,6 @@ def create_body(bucket, imageName, createdImageDateTime, receivedBody, keyType):
     }
 
     # Add the labels or faces to the response body
-    if keyType == 'faces':
-        response["faces"] = receivedBody
-    else:
-        response["labels"] = receivedBody
+    response[keyType] = receivedBody
 
     return response
