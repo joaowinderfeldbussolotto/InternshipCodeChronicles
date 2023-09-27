@@ -1,6 +1,7 @@
 from utils import create_response_data, create_body
 from services.rekognition_service import detect_faces
 from services.s3_service import created_image_datetime
+from exceptions.base_exception import BaseException
 import json
 
 
@@ -44,5 +45,7 @@ def handle_v2_vision(event):
 
       # Return the answer
       return create_response_data(200, responseBody)
+    except BaseException as e:
+       return create_response_data(e.status_code, {'Error': str(e)})
     except Exception as e:
-        return create_response_data(500, {"error": e})
+        return create_response_data(500, {"Error": str(e)})
