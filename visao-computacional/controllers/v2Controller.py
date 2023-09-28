@@ -1,7 +1,6 @@
 from utils import create_response_data, create_body, get_data_from_body
 from services.rekognition_service import detect_faces
 from services.s3_service import created_image_datetime
-from exceptions.base_exception import BaseException
 from middleware.exception_handler import exception_handler_middleware
 import json
 

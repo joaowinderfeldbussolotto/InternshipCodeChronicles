@@ -1,5 +1,5 @@
 import boto3
-from exceptions.aws_exceptions.rekognition_exception import RekognitionException, RekognitionRateLimitExceededException, RekognitionInvalidS3ObjectException
+from exceptions.aws_exceptions.rekognition_exception import RekognitionException
 from core.config import settings
 rekognition_client = boto3.client('rekognition')
 
