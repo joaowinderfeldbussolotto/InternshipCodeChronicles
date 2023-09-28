@@ -18,6 +18,7 @@
 ***
 
 <a name="ancora"></a>
+
 ## 📖 Sumário
 - [1 - Objetivo](#ancora1)
   - [1.1 - Tecnologias Utilizadas](#ancora1-1)
@@ -31,7 +32,8 @@
 - [4 - Estrutura de Pastas do Projeto](#ancora4)
 - [5 - Arquitetura AWS](#ancora5)
 - [6 - Dificuldades conhecidas](#ancora6)
-- [7 - Licença](#ancora7)
+- [7 - Fonte das Imagens Utilizadas no Projeto](#ancora7)
+- [8 - Licença](#ancora8)
 
 ***
 <a id="ancora1"></a>
@@ -63,42 +65,180 @@ O objetivo do projeto é desenvolver uma aplicação para automatizar a análise
 
 O desenvolvimento do projeto envolveu a criação e configuração de funções lambdas no `AWS Lambda`, habilitando o processamento de imagens armazenadas no `Amazon S3`, construídas usando o framework `Serverless`. Utilizando o `AWS Rekognition`, as funções foram desenvolvidas com o objetivo de identificar informações relevantes nas imagens, como etiquetas descritivas e emoções predominantes nos rostos detectados. A exposição das funções por meio do `API Gateway`, com endpoints "/v1/vision" e "/v2/vision", permitiu o acesso simplificado a esses serviços via API. Além disso, o framework `Serverless` também foi utilizado para o provisionamento bucket S3 e gerenciamento das políticas de acesso do `IAM` referente às funções Lambdas.
 
-<!-- <a id="ancora2-1"></a>
+<a id="ancora2-1"></a>
 
-- ## 2.1 - Desenvolvimento da Base de Dados
-  A construção do banco de dados MySQL utilizando o `Amazon RDS` foi essencial para o nosso projeto. A tabela "filmes" está relacionada com a tabela "sessoes", permitindo que cada sessão seja associada a um filme específico. A tabela "sessoes" também está relacionada com a tabela "salas", o que permite identificar a sala onde uma sessão ocorrerá. Além disso, as tabelas "reservas" e "sessoes" estão relacionadas garantindo que cada reserva armazene o número de poltronas reservadas para cada sessão. 
-
-  <div align="center">
-    <img src = "./assets/EER.png">
-  </div>
+- ## [2.1 - Rota 1 - Get /](https://84ua33iq3d.execute-api.us-east-1.amazonaws.com/)
+  Resposta a ser entregue:
+  
+  ```json
+    {
+      "message": "Go Serverless v3.0! Your function executed successfully!",
+      "input": {
+          ...(event)
+        }
+    }
+  ```
 
 <a id="ancora2-2"></a>
 
-- ## 2.2 - Desenvolvimento das APIs
-  Desenvolvemos APIs utilizando o framework `Serverless`, que foram implantadas como funções Lambdas na AWS e integradas ao `Amazon API Gateway`. Essas APIs desempenham um papel fundamental na relação entre o Banco de Dados MySQL disponibilizado pelo `Amazon RDS` e o `CineBot`. Elas permitem consultas sobre filmes em cartaz, disponibilidade de sessões, reserva de ingressos e cancelamento de reservas, possibilitando uma grande experiência aos usuários ao interagirem com o `CineBot`.
+- ## [2.2 - Rota 2 - Get /v1](https://84ua33iq3d.execute-api.us-east-1.amazonaws.com/v1)
+  Resposta a ser entregue:
+
+  ```json
+    {
+      "message": "VISION api version 1."
+    }
+  ```
 
 <a id="ancora2-3"></a>
 
-- ## 2.3 - Desenvolvimento do Chatbot com Amazon Lex V2
-  Desenvolvemos o CineBot usando Amazon Lex V2 para criar uma experiência conversacional intuitiva. Criamos menus interativos com "response cards" para o usuário navegar para cada intenção do chatbot, permitindo que os usuários escolham ações, como pesquisar filmes ou fazer reservas. Cada intenção está vinculada a uma função Lambda que processa as solicitações dos usuários e fornece respostas relevantes.
+- ## [2.3 - Rota 3 - Get /v2](https://84ua33iq3d.execute-api.us-east-1.amazonaws.com/v2)
+  Resposta a ser entregue:
 
-
-
+  ```json
+    {
+      "message": "VISION api version 2."
+    }
+  ```
 
 <a id="ancora2-4"></a>
 
-- ## 2.4 - Desenvolvimento das Funções Lambda para Integração com o Chatbot
-  Nossas funções Lambda foram escritas em `Python` implantadas usando o framework `Serverless`. Elas lidam com solicitações específicas do chatbot, como reservas de ingressos e consultas sobre filmes, garantindo eficiência e escalabilidade. Isso permite ao CineBot oferecer uma experiência de usuário contínua e confiável.
- 
+- ## [2.4 - Rota 4 - Post /v1/vision](https://84ua33iq3d.execute-api.us-east-1.amazonaws.com/v1/vision)
+  A API "v1/vision" permite a extração de tags de imagens armazenadas no `Amazon S3`. Ao enviar uma solicitação POST com o nome do bucket e da imagem desejada, a API utiliza a função de `Detecção de Rótulos` do `Amazon Rekognition` para processar a imagem. Em resposta, a API fornece as tags extraídas, incluindo a confiança da detecção, o link da imagem e a data de criação da mesma.
+
+  Exemplo de entrada:
+
+  ```json
+    {
+      "bucket": "mycatphotos",
+      "imageName": "cat.jpg"
+    }
+  ```
+
+  Exemplo de retorno:
+
+  ```json
+    {
+      "url_to_image": "https://mycatphotos/cat.jpg",
+      "created_image": "02-02-2023 17:00:00",
+      "labels": [
+        {
+          "Confidence": 96.59198760986328,
+          "Name": "Animal"
+        },
+        {
+          "Confidence": 96.59198760986328,
+          "Name": "Cat"
+        },
+        {
+          "Confidence": 96.59198760986328,
+          "Name": "Pet"
+        },
+        {
+          "Confidence": 96.59198760986328,
+          "Name": "Siamese"
+        }
+      ]
+    }
+  ```
+
+<a id="ancora2-5"></a>
+
+- ## [2.5 - Rota 5 - Post /v2/vision](https://84ua33iq3d.execute-api.us-east-1.amazonaws.com/v2/vision)
+  A API "v2/vision" tem como foco a detecção de rostos em imagens armazenadas no `Amazon S3`. Ao enviar uma solicitação POST com o nome do bucket e da imagem desejada, a API utiliza a função de `Análse Facial` do `Amazon Rekognition` para analisar a imagem em busca de faces. Ela retorna informações sobre os rostos detectados, incluindo a localização, idade estimada e gênero das pessoas na imagem, bem como o link da imagem e sua data de criação.
+
+  Exemplo de entrada:
+
+  ```json
+    {
+      "bucket": "myphotos",
+      "imageName": "test-happy.jpg"
+    }
+  ```
+
+  Exemplo de retorno:
+
+  ```json
+    {
+      "url_to_image": "https://myphotos/test.jpg",
+      "created_image": "02-02-2023 17:00:00",
+      "faces": [
+        {
+        "position":
+        {
+          "Height": 0.06333330273628235,
+          "Left": 0.1718519926071167,
+          "Top": 0.7366669774055481,
+          "Width": 0.11061699688434601
+        },
+        "classified_emotion": "HAPPY",
+        "classified_emotion_confidence": 99.92965151369571686
+        }
+    ]
+    }
+  ```
+  No caso de duas faces:
+
+  ```json
+    {
+      "url_to_image": "https://myphotos/test.jpg",
+      "created_image": "02-02-2023 17:00:00",
+      "faces": [
+        {
+        "position":
+        {
+          "Height": 0.06333330273628235,
+          "Left": 0.1718519926071167,
+          "Top": 0.7366669774055481,
+          "Width": 0.11061699688434601
+        },
+        "classified_emotion": "HAPPY",
+        "classified_emotion_confidence": 99.92965151369571686
+        },
+        {
+        "position":
+        {
+          "Height": 0.08333330273628235,
+          "Left": 0.3718519926071167,
+          "Top": 0.6366669774055481,
+          "Width": 0.21061699688434601
+        },
+        "classified_emotion": "HAPPY",
+        "classified_emotion_confidence": 98.92965151369571686
+        }
+    ]
+    }
+  ```
+  Resposta a ser entregue quando não houver face:
+
+  ```json
+    {
+      "url_to_image": "https://myphotos/test.jpg",
+      "created_image": "02-02-2023 17:00:00",
+      "faces": [
+        {
+        "position":
+        {
+          "Height": Null,
+          "Left": Null,
+          "Top": Null,
+          "Width": Null
+        }
+        "classified_emotion": Null,
+        "classified_emotion_confidence": Null
+        }
+    ]
+    }
+  ```
+
 ***
 
 <a id="ancora3"></a>
 
-# 3 - Acesso à Aplicação e Como Utilizá-la 
+# 3 - Acesso à Aplicação
 
-### **[Link](https://join.slack.com/t/cinebot/shared_invite/zt-230mdlfty-ZnXD1152TADTj6EGxtvNQg)**
+## **[Link](https://84ua33iq3d.execute-api.us-east-1.amazonaws.com/)**
 
-Para utilizar o `CineBot` no `Slack`, basta iniciar uma conversa com ele e selecionar uma das intents disponíveis: "Consultar Filmes" para obter informações sobre filmes em exibição, "Reservar Ingressos" para fazer uma reserva, "Sessões Disponíveis" para consultar as sessões disponíveis ou "Cancelar Reserva" para cancelar uma reserva existente. O `CineBot` guiará você através de diálogos e menu interativo, fornecendo respostas rápidas e informações relevantes para facilitar a sua experiência. -->
 
 <a id="ancora4"></a>
 
@@ -106,16 +246,18 @@ Para utilizar o `CineBot` no `Slack`, basta iniciar uma conversa com ele e selec
 
 ```
 .
+├── assets
+├── dataset
 ├── README.md
 └── visao-computacional
     ├── controllers
     │   ├── v1Controller.py
     │   └── v2Controller.py
+    ├── core
+    │   └── config.py
     ├── services
     │   ├── RekognitionService.py
     │   └── S3Service.py
-    ├── core
-    │   └── config.py
     ├── routes
     │   ├── v1
     |   |    ├── v1_description.py
@@ -137,7 +279,7 @@ Para utilizar o `CineBot` no `Slack`, basta iniciar uma conversa com ele e selec
 # 5 - Arquitetura AWS
 
   <div align="center">
-    <img src = "./assets/ArquiteturaAWS.png">
+    <img src = "./assets/s8-arch-aws.drawio.png">
   </div>
 
 
@@ -147,8 +289,22 @@ Para utilizar o `CineBot` no `Slack`, basta iniciar uma conversa com ele e selec
 <a id="ancora6"></a>
 # 6 - Dificuldades conhecidas
 
+1. Dificuldade de integrar os códigos de erro dos serviços da AWS.
+
 
 <a id="ancora7"></a>
-# 7 - Licença
+
+# 7 - Fonte das Imagens Utilizadas no Projeto
+
+- [NVlabs/ffhq-dataset: Flickr-Faces-HQ Dataset (FFHQ) (github.com)](https://github.com/NVlabs/ffhq-dataset/tree/master)
+- [The Images of Groups Dataset (cornell.edu)](http://chenlab.ece.cornell.edu/people/Andy/ImagesOfGroups.html)
+- [AutoAndRoad](AutoAndRoad.com)
+- [graphassets](graphassets.com)
+- [redbookmarks](redbookmarks.com)
+- [autotrader](autotrader.com)
+- [usnews](usnews.com)
+
+<a id="ancora8"></a>
+# 8 - Licença
 
 Este projeto está licenciado sob a Licença MIT - consulte o [Link](https://mit-license.org/) para obter mais detalhes.
