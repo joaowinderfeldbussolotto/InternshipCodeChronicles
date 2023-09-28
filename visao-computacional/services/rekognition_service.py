@@ -28,7 +28,7 @@ def detect_labels(imageName, bucketName=settings.BUCKET_NAME):
         return response
     except Exception as e:
         error_code = e.response['Error']['Code']
-        raise handle_rekognition_exception(error_code)
+        raise RekognitionException.handle_rekognition_exception(error_code)
 
 
 def detect_faces(imageName, bucketName=settings.BUCKET_NAME):
@@ -58,19 +58,5 @@ def detect_faces(imageName, bucketName=settings.BUCKET_NAME):
     return response
   except Exception as e:
     error_code = e.response['Error']['Code']
-    raise handle_rekognition_exception(error_code)
+    raise RekognitionException.handle_rekognition_exception(error_code)
 
-def handle_rekognition_exception(error_code):
-    """
-    Handle Amazon Rekognition exceptions based on the error code.
-
-    @param error_code (str): Error code returned by Amazon Rekognition.
-
-    @return RekognitionException: Custom Rekognition exception based on the error code.
-    """
-    rekognition_exceptions = {
-        "InvalidS3ObjectException": RekognitionInvalidS3ObjectException(),
-        "ProvisionedThroughputExceededException": RekognitionRateLimitExceededException()
-    }
-
-    return rekognition_exceptions.get(error_code, RekognitionException())
