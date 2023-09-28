@@ -1,6 +1,7 @@
 import pytz
 import boto3
 from core.config import settings
+from exceptions.aws_exceptions.s3_exception import S3Exception
 def created_image_datetime(imageName, bucketName=settings.BUCKET_NAME):
     """
     Get the datetime when the image was created.
@@ -17,4 +18,5 @@ def created_image_datetime(imageName, bucketName=settings.BUCKET_NAME):
         response = imageInfo['LastModified'].astimezone(tz).strftime("%d-%m-%Y %H:%M:%S")
         return response
     except Exception as e:
-        return str(e)
+        error_code = e.response['Error']['Code']
+        raise S3Exception.handle_s3_exception(error_code)

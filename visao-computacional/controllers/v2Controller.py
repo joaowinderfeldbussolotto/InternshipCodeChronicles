@@ -20,10 +20,10 @@ def handle_v2_vision(event):
       bucket, imageName = get_data_from_body(json.loads(event['body']))
 
 
-      # Get labels from image
-      detectFacesResponse = detect_faces(imageName, bucket)
       # Get the datetime when the image was created
       createdImageResponse = created_image_datetime(imageName, bucket)
+      # Get labels from image
+      detectFacesResponse = detect_faces(imageName, bucket)
          
       # Prepare response body
       faces = [

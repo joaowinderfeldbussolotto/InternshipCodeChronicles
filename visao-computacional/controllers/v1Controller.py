@@ -19,10 +19,10 @@ def handle_v1_vision(event):
       # Obtain the image name and bucket name from the request body
       bucket, imageName = get_data_from_body(json.loads(event['body']))
 
-      # Get labels from image
-      detectLabelsResponse = detect_labels(imageName, bucket)
       # Get the datetime when the image was created
       createdImageResponse = created_image_datetime(imageName, bucket)
+      # Get labels from image
+      detectLabelsResponse = detect_labels(imageName, bucket)
       
       # Prepare response body
       labels = [{'Confidence': label['Confidence'],'Name': label['Name']} for label in detectLabelsResponse['Labels']]
