@@ -1,4 +1,5 @@
 import json
+from exceptions.user_exceptions.user_exception import MissingParamException
 def create_response_data(statusCode, body):
     """
      Create response data to send to API.
@@ -44,3 +45,10 @@ def create_body(bucket, imageName, createdImageDateTime, receivedBody, keyType =
     response[keyType] = receivedBody
 
     return response
+
+
+def get_data_from_body(body):
+    bucket = body.get('bucket')
+    imageName = body.get('imageName')
+    if not imageName: raise MissingParamException(param_name = 'imageName')
+    return bucket, imageName

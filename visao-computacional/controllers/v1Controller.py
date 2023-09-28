@@ -1,4 +1,4 @@
-from utils import create_response_data, create_body
+from utils import create_response_data, create_body, get_data_from_body
 from services.rekognition_service import detect_labels
 from services.s3_service import created_image_datetime
 from exceptions.base_exception import BaseException
@@ -17,9 +17,7 @@ def handle_v1_vision(event):
 
     try:
       # Obtain the image name and bucket name from the request body
-      body = json.loads(event['body'])
-      bucket = body.get('bucket')
-      imageName = body.get('imageName')
+      bucket, imageName = get_data_from_body(json.loads(event['body']))
 
       # Get labels from image
       detectLabelsResponse = detect_labels(imageName, bucket)
