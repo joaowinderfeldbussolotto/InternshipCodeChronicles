@@ -19,4 +19,5 @@ else
   echo "Unable to locate '$ENV_FILE'"
 fi
 
-# this script will sync files from ./images/ to s3: upload to s3 missing files
+# usage: sync files from ./images/ to s3 =|= upload missing files to s3 
+# non-default tip: usage of --delete flag on 'aws' cli deletes images on s3 and not in ./images/
