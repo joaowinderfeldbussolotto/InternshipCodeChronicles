@@ -30,6 +30,29 @@ resources:
       Type: AWS::S3::Bucket
       Properties:
         BucketName: ${env:BUCKET_NAME}
+        PublicAccessBlockConfiguration:
+          RestrictPublicBuckets: false
+    
+    MyBucketPolicy:
+      Type: AWS::S3::BucketPolicy
+      Properties:
+        Bucket:
+          Ref: MyS3Bucket
+        PolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Principal:
+                AWS: "*"
+              Action: 
+                - s3:GetObject
+              Resource:
+                Fn::Join:
+                  - ""
+                  - - "arn:aws:s3:::"
+                    - Ref: MyS3Bucket
+                    - "/*"
+
 
 
 functions:
