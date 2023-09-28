@@ -90,3 +90,6 @@ functions:
 plugins:
   - serverless-offline
   - serverless-python-requirements
+custom:
+  serverless-offline:
+    host: '127.0.0.1'
