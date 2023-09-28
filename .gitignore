@@ -129,9 +129,8 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-.vscode
 __pycache__
 package-lock.json
 package.json
-
+settings.json
 venv

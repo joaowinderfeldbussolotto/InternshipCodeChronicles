@@ -1,0 +1,11 @@
+# CONFIGURE THE SETTINGS.JSON TO USE ENVIROMENT VARIABLES FOR API_URL
+
+# DOCS: https://marketplace.visualstudio.com/items?itemName=humao.rest-client&ssr=false#overview
+
+# TUTORIAL: https://courses.codewithandrea.com/courses/783023/lectures/14364306
+
+# Local host
+@host = http://127.0.0.1:3000
+
+### health
+GET {{host}}
