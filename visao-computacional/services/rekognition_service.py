@@ -1,7 +1,7 @@
 import boto3
+from exceptions.aws_exceptions.rekognition_exception import RekognitionException, RekognitionRateLimitExceededException, RekognitionInvalidS3ObjectException
 from core.config import settings
-rekognition_client = boto3.client('rekognition', region_name='us-east-1')
-
+rekognition_client = boto3.client('rekognition')
 
 def detect_labels(imageName, bucketName=settings.BUCKET_NAME):
     """
@@ -12,6 +12,8 @@ def detect_labels(imageName, bucketName=settings.BUCKET_NAME):
 
      @return dict: A dictionary containing the detected labels and their confidence scores.
     """
+    if bucketName is None:
+     bucketName = settings.BUCKET_NAME
     try:
         response = rekognition_client.detect_labels(
             Image={
@@ -21,11 +23,12 @@ def detect_labels(imageName, bucketName=settings.BUCKET_NAME):
                 }
             },
             MaxLabels=10,
-            MinConfidence=60.0
+            MinConfidence=85.0
         )
         return response
     except Exception as e:
-        return str(e)
+        error_code = e.response['Error']['Code']
+        raise handle_rekognition_exception(error_code)
 
 
 def detect_faces(imageName, bucketName=settings.BUCKET_NAME):
@@ -39,6 +42,10 @@ def detect_faces(imageName, bucketName=settings.BUCKET_NAME):
   @return dict: A dictionary containing information about the detected faces.
   """
 
+  if bucketName is None:
+     bucketName = settings.BUCKET_NAME
+  
+     
   try:
     response = rekognition_client.detect_faces(
       Image={
@@ -50,4 +57,20 @@ def detect_faces(imageName, bucketName=settings.BUCKET_NAME):
       Attributes=['ALL'])
     return response
   except Exception as e:
-    return str(e)
+    error_code = e.response['Error']['Code']
+    raise handle_rekognition_exception(error_code)
+
+def handle_rekognition_exception(error_code):
+    """
+    Handle Amazon Rekognition exceptions based on the error code.
+
+    @param error_code (str): Error code returned by Amazon Rekognition.
+
+    @return RekognitionException: Custom Rekognition exception based on the error code.
+    """
+    rekognition_exceptions = {
+        "InvalidS3ObjectException": RekognitionInvalidS3ObjectException(),
+        "ProvisionedThroughputExceededException": RekognitionRateLimitExceededException()
+    }
+
+    return rekognition_exceptions.get(error_code, RekognitionException())

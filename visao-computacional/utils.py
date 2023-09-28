@@ -1,5 +1,5 @@
 import json
-def createResponseData(statusCode, body):
+def create_response_data(statusCode, body):
     """
      Create response data to send to API.
      

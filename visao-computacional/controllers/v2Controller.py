@@ -1,6 +1,7 @@
-from utils import createResponseData, create_body
-from services.RekognitionService import detect_faces
-from services.S3Service import created_image_datetime
+from utils import create_response_data, create_body
+from services.rekognition_service import detect_faces
+from services.s3_service import created_image_datetime
+from exceptions.base_exception import BaseException
 import json
 
 
@@ -22,7 +23,6 @@ def handle_v2_vision(event):
 
       # Get labels from image
       detectFacesResponse = detect_faces(imageName, bucket)
-
       # Get the datetime when the image was created
       createdImageResponse = created_image_datetime(imageName, bucket)
          
@@ -40,10 +40,12 @@ def handle_v2_vision(event):
 
       responseBody = create_body(bucket, imageName, createdImageResponse, faces, 'faces')
 
-      # Log of results in CloudWatch
-      print(responseBody)
+      # detectFacesResponse log for CloudWatch
+      print(detectFacesResponse)
 
       # Return the answer
-      return createResponseData(200, responseBody)
+      return create_response_data(200, responseBody)
+    except BaseException as e:
+       return create_response_data(e.status_code, {'Error': str(e)})
     except Exception as e:
-        return createResponseData(500, {"error": e})
+        return create_response_data(500, {"Error": str(e)})
