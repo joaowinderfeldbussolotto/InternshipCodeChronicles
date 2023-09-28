@@ -23,19 +23,32 @@ def handle_v2_vision(event):
     createdImageResponse = created_image_datetime(imageName, bucket)
     # Get labels from image
     detectFacesResponse = detect_faces(imageName, bucket)
-        
-    # Prepare response body
-    faces = [
-      {'position': 
-        {'Height': element['BoundingBox']['Height'],
-          'Left': element['BoundingBox']['Left'],
-          'Top': element['BoundingBox']['Top'],
-          'Width': element['BoundingBox']['Width'],
-        },
-        'classified_emotion': element['Emotions'][0]['Type'],
-        'classified_emotion_confidence': element['Emotions'][0]['Confidence'],
-        } for element in detectFacesResponse['FaceDetails']]
 
+    # Prepare response body
+    facesDetails = detectFacesResponse['FaceDetails'] 
+    if len(facesDetails):
+      faces = [
+        {'position': 
+          {'Height': faceDetails['BoundingBox']['Height'],
+            'Left': faceDetails['BoundingBox']['Left'],
+            'Top': faceDetails['BoundingBox']['Top'],
+            'Width': faceDetails['BoundingBox']['Width'],
+          },
+          'classified_emotion': faceDetails['Emotions'][0]['Type'],
+          'classified_emotion_confidence': faceDetails['Emotions'][0]['Confidence'],
+          } for faceDetails in facesDetails]
+    else: 
+      faces = [
+        {'position': 
+          {'Height': None,
+            'Left': None,
+            'Top': None,
+            'Width': None,
+          },
+          'classified_emotion': None,
+          'classified_emotion_confidence': None,
+          }]
+    
     responseBody = create_body(bucket, imageName, createdImageResponse, faces, 'faces')
 
     # detectFacesResponse log for CloudWatch

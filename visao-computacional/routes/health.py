@@ -1,4 +1,4 @@
-from utils import createResponseData
+from utils import create_response_data
 
 
 def health(event, context):
@@ -6,5 +6,5 @@ def health(event, context):
         "message": "Go Serverless v3.0! Your function executed successfully!",
         "input": event,
     }
-    response = createResponseData(200, body)
+    response = create_response_data(200, body)
     return response
