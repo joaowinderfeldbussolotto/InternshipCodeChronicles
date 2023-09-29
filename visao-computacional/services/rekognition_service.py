@@ -1,4 +1,5 @@
 import boto3
+from botocore.exceptions import ClientError
 from exceptions.aws_exceptions.rekognition_exception import RekognitionException
 from core.config import settings
 rekognition_client = boto3.client('rekognition')
@@ -26,7 +27,7 @@ def detect_labels(imageName, bucketName=settings.BUCKET_NAME):
             MinConfidence=85.0
         )
         return response
-    except Exception as e:
+    except ClientError as e:
         error_code = e.response['Error']['Code']
         raise RekognitionException.handle_rekognition_exception(error_code)
 
@@ -56,7 +57,7 @@ def detect_faces(imageName, bucketName=settings.BUCKET_NAME):
       },
       Attributes=['ALL'])
     return response
-  except Exception as e:
+  except ClientError as e:
     error_code = e.response['Error']['Code']
     raise RekognitionException.handle_rekognition_exception(error_code)
 
