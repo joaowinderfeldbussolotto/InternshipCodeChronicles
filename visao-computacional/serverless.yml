@@ -8,6 +8,7 @@ provider:
   region: us-east-1
   environment: 
     BUCKET_NAME: ${env:BUCKET_NAME}
+    PRINCIPAL_ARN: ${env:PRINCIPAL_ARN}
   
   iam:
     role:
@@ -16,6 +17,7 @@ provider:
         - Effect: Allow
           Action:
             - s3:GetObject
+            - s3:GetObjectAttributes
           Resource:
             - arn:aws:s3:::${env:BUCKET_NAME}/*
         - Effect: Allow
@@ -31,6 +33,7 @@ resources:
       Properties:
         BucketName: ${env:BUCKET_NAME}
         PublicAccessBlockConfiguration:
+          BlockPublicPolicy: false
           RestrictPublicBuckets: false
     
     MyBucketPolicy:
@@ -46,12 +49,24 @@ resources:
                 AWS: "*"
               Action: 
                 - s3:GetObject
+                - s3:GetObjectAttributes
               Resource:
                 Fn::Join:
                   - ""
                   - - "arn:aws:s3:::"
                     - Ref: MyS3Bucket
                     - "/*"
+            - Effect: Allow
+              Principal:
+                AWS: "${env:PRINCIPAL_ARN}"
+              Action: 
+                - s3:ListBucket
+              Resource:
+                Fn::Join:
+                  - ""
+                  - - "arn:aws:s3:::"
+                    - Ref: MyS3Bucket
+              
 
 
 
