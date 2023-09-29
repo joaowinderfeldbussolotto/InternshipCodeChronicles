@@ -223,7 +223,7 @@ O desenvolvimento do projeto envolveu a criação e configuração de funções 
           "Left": Null,
           "Top": Null,
           "Width": Null
-        }
+        },
         "classified_emotion": Null,
         "classified_emotion_confidence": Null
         }
@@ -250,17 +250,22 @@ Para facilitar o teste das APIs do projeto, configuramos o Visual Studio Code pa
   Se você já a tem instalada, pode pular este passo. Caso não apareça a recomendação no Visual Studio Code, siga estas etapas:
 
   1. Vá para a aba "Extensions" (Extensões) na barra lateral esquerda.
-  2. Pesquise por "Rest Client" na caixa de pesquisa.
-  3. Clique em "Install" (Instalar) ao lado da extensão oferecida por "donebd".
-
-  ## Passo 2: Abra um arquivo .http
+  2. Clique em "Install" (Instalar) ao lado da extensão oferecida por "donebd".
+  
+  ## Passo 2: Configurar o settings.json
+  
+  
+  1. Configurar o settings.json para usar o REST Client
+  - DOCS: https://marketplace.visualstudio.com/items?itemName=humao.rest-client&ssr=false#overview
+  - TUTORIAL: https://courses.codewithandrea.com/courses/783023/lectures/14364306
+  ## Passo 3: Abra um arquivo .http
 
   Agora que você tem a extensão instalada e configurada, siga estas etapas para abrir e executar um arquivo .http:
 
   1. Navegue até a pasta "http_requests" no seu projeto.
   2. Abra o arquivo .http correspondente à rota ou funcionalidade que deseja testar.
 
-  ## Passo 3: Execute a solicitação HTTP
+  ## Passo 4: Execute a solicitação HTTP
 
   Para executar a solicitação HTTP e testar a API, siga estas etapas:
 
@@ -275,30 +280,42 @@ Para facilitar o teste das APIs do projeto, configuramos o Visual Studio Code pa
 
 ```
 .
-├── assets
-├── dataset
 ├── README.md
+├── .vscode
+│   ├── extensions.json
+│   └── settings.json
+├── dataset
+│   ├── images
+│   │   ├── car_1.jpg
+│   │   ├── ...
+│   │   └── single_face_9.png
+│   └── sync_s3.sh
 └── visao-computacional
-    ├── controllers
-    │   ├── v1Controller.py
-    │   └── v2Controller.py
-    ├── core
-    │   └── config.py
-    ├── services
-    │   ├── RekognitionService.py
-    │   └── S3Service.py
+    ├── controllers
+    │   ├── v1Controller.py
+    │   └── v2Controller.py
+    ├── core
+    │   ├── config.py
+    │   └── exceptions.py
+    ├── .env
+    ├── exceptions
+    │   ├── aws_exceptions
+    │   ├── base_exception.py
+    │   └── user_exceptions
+    ├── http_requests
+    │   ├── ...
+    ├── middleware
+    │   └── exception_handler.py
+    ├── requirements.txt
     ├── routes
-    │   ├── v1
-    |   |    ├── v1_description.py
-    │   |    └── v1_vision.py
-    |   ├── v2
-    |   |    ├── v2_description.py
-    │   |    └── v2_vision.py
-    │   └── health.py
-    ├── requirements.txt
-    ├── serverless.yaml
-    └── utils.py 
-
+    │   ├── health.py
+    │   ├── v1
+    │   ├── ...
+    │   └── v2
+    │   └── ...
+    ├── serverless.yml
+    ├── services
+    └── utils.py
 ```
 
 ***
