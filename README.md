@@ -235,9 +235,38 @@ O desenvolvimento do projeto envolveu a criação e configuração de funções 
 
 <a id="ancora3"></a>
 
-# 3 - Acesso à Aplicação
+# 3 - Acesso à Aplicação e Como Utilizá-la
 
 ## **[Link](https://84ua33iq3d.execute-api.us-east-1.amazonaws.com/)**
+
+Para facilitar o teste das APIs do projeto, configuramos o Visual Studio Code para recomendar a instalação da extensão "Rest Client API".
+
+<div align="center">
+    <img src = "./assets/extensao.png">
+</div>
+
+  ## Passo 1: Instale a extensão "Rest Client"
+
+  Se você já a tem instalada, pode pular este passo. Caso não apareça a recomendação no Visual Studio Code, siga estas etapas:
+
+  1. Vá para a aba "Extensions" (Extensões) na barra lateral esquerda.
+  2. Pesquise por "Rest Client" na caixa de pesquisa.
+  3. Clique em "Install" (Instalar) ao lado da extensão oferecida por "donebd".
+
+  ## Passo 2: Abra um arquivo .http
+
+  Agora que você tem a extensão instalada e configurada, siga estas etapas para abrir e executar um arquivo .http:
+
+  1. Navegue até a pasta "http_requests" no seu projeto.
+  2. Abra o arquivo .http correspondente à rota ou funcionalidade que deseja testar.
+
+  ## Passo 3: Execute a solicitação HTTP
+
+  Para executar a solicitação HTTP e testar a API, siga estas etapas:
+
+  1. Clique no botão "Send Request" (Enviar Solicitação) no canto superior direito da solicitação no arquivo .http.
+  2. Aguarde a resposta da API. Ela será exibida na parte inferior do Visual Studio Code, na guia "Output" (Saída).
+  3. Você verá a resposta da API, incluindo o código de status HTTP e o corpo da resposta, na guia "Output".
 
 
 <a id="ancora4"></a>
