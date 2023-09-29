@@ -49,7 +49,7 @@ def handle_v2_vision(event):
           'classified_emotion_confidence': None,
           }]
     
-    responseBody = create_body(bucket, imageName, createdImageResponse, faces, 'faces')
+    responseBody = create_body(imageName, createdImageResponse, faces, 'faces', bucket)
 
     # detectFacesResponse log for CloudWatch
     print(detectFacesResponse)

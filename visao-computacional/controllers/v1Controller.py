@@ -26,7 +26,7 @@ def handle_v1_vision(event):
     # Prepare response body
     labels = [{'Confidence': label['Confidence'],'Name': label['Name']} for label in detectLabelsResponse['Labels']]
 
-    responseBody = create_body(bucket, imageName, createdImageResponse, labels, 'labels')
+    responseBody = create_body(imageName, createdImageResponse, labels, 'labels', bucket)
 
     # detectLabelsResponse log for CloudWatch
     print(detectLabelsResponse)

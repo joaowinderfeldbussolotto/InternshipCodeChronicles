@@ -1,5 +1,7 @@
 import json
 from exceptions.user_exceptions.user_exception import MissingParamException
+from core.config import settings
+
 def create_response_data(statusCode, body):
     """
      Create response data to send to API.
@@ -18,20 +20,21 @@ def create_response_data(statusCode, body):
         'body': json.dumps(body)
     }
 
-def create_body(bucket, imageName, createdImageDateTime, receivedBody, keyType = 'labels'):
+def create_body(imageName, createdImageDateTime, receivedBody, keyType = 'labels', bucket=settings.BUCKET_NAME):
     """
     Creates a response body based on the provided parameters.
 
-    @param bucket (str): The name of the S3 bucket.
     @param imageName (str): The name of the image.
     @param createdImageDateTime (str): The creation date and time of the image in the "dd-mm-YYYY HH:MM:SS" format.
     @param receivedBody (list): A list of objects with information, such as 'labels' or 'faces'.
     @param keyType (str, optional): The type of key to use in the response body ('labels' or 'faces'). Default is 'labels'.
+    @param bucket (str): The name of the S3 bucket.
 
     @return dict: The formatted response body.
     """
 
     # Build the image URL
+    if bucket is None: bucket = settings.BUCKET_NAME
     imageUrl = f"https://{bucket}.s3.amazonaws.com/{imageName}"
     
 
