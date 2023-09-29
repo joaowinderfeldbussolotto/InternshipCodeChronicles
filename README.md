@@ -27,7 +27,8 @@
   - [2.2 - Rota 2 - Get /v1](#ancora2-2)
   - [2.3 - Rota 3 - Get /v2](#ancora2-3)
   - [2.4 - Rota 4 - Post /v1/vision](#ancora2-4)
-  - [2.5 - Rota 5 - Post /v2/vision](#ancora2-4)
+  - [2.5 - Rota 5 - Post /v2/vision](#ancora2-5)
+  - [2.6 - HTTP Responses](#ancora2-6)
 - [3 - Acesso à Aplicação e Como Utilizá-la](#ancora3)
 - [4 - Estrutura de Pastas do Projeto](#ancora4)
 - [5 - Arquitetura AWS](#ancora5)
@@ -110,36 +111,25 @@ O desenvolvimento do projeto envolveu a criação e configuração de funções 
 
   ```json
     {
-      "bucket": "mycatphotos",
-      "imageName": "cat.jpg"
+      "bucket": "bucket-computer-vision-s8",
+      "imageName": "single_face_1.png"
     }
   ```
 
   Exemplo de retorno:
 
   ```json
-    {
-      "url_to_image": "https://mycatphotos/cat.jpg",
-      "created_image": "02-02-2023 17:00:00",
+  {
+      "url_to_image": "https://bucket-computer-vision-s8.s3.amazonaws.com/single_face_1.png",
+      "created_image": "28-09-2023 14:29:41",
       "labels": [
-        {
-          "Confidence": 96.59198760986328,
-          "Name": "Animal"
-        },
-        {
-          "Confidence": 96.59198760986328,
-          "Name": "Cat"
-        },
-        {
-          "Confidence": 96.59198760986328,
-          "Name": "Pet"
-        },
-        {
-          "Confidence": 96.59198760986328,
-          "Name": "Siamese"
-        }
+          {
+              "Confidence": 99.99998474121094,
+              "Name": "Glasses"
+          },
+          (...)
       ]
-    }
+  }
   ```
 
 <a id="ancora2-5"></a>
@@ -151,87 +141,89 @@ O desenvolvimento do projeto envolveu a criação e configuração de funções 
 
   ```json
     {
-      "bucket": "myphotos",
-      "imageName": "test-happy.jpg"
+        "bucket": "bucket-computer-vision-s8",
+        "imageName": "multiple_faces_6.jpg"
     }
   ```
-
-  Exemplo de retorno:
+  Saída: 
 
   ```json
     {
-      "url_to_image": "https://myphotos/test.jpg",
-      "created_image": "02-02-2023 17:00:00",
-      "faces": [
-        {
-        "position":
-        {
-          "Height": 0.06333330273628235,
-          "Left": 0.1718519926071167,
-          "Top": 0.7366669774055481,
-          "Width": 0.11061699688434601
-        },
-        "classified_emotion": "HAPPY",
-        "classified_emotion_confidence": 99.92965151369571686
-        }
-    ]
+        "url_to_image": "https://bucket-computer-vision-s8.s3.amazonaws.com/multiple_faces_6.jpg",
+        "created_image": "28-09-2023 14:29:40",
+        "faces": [
+            {
+                "position": {
+                    "Height": 0.6058058142662048,
+                    "Left": 0.4741848111152649,
+                    "Top": 0.2359217256307602,
+                    "Width": 0.3144436180591583
+                },
+                "classified_emotion": "CALM",
+                "classified_emotion_confidence": 83.18921661376953
+            },
+            {
+                "position": {
+                    "Height": 0.571341335773468,
+                    "Left": 0.2057298868894577,
+                    "Top": 0.34210315346717834,
+                    "Width": 0.2855561077594757
+                },
+                "classified_emotion": "HAPPY",
+                "classified_emotion_confidence": 99.9555435180664
+            }
+        ]
     }
   ```
-  No caso de duas faces:
+  Quando não houver face:
+
+  Exemplo de entrada:
 
   ```json
     {
-      "url_to_image": "https://myphotos/test.jpg",
-      "created_image": "02-02-2023 17:00:00",
-      "faces": [
-        {
-        "position":
-        {
-          "Height": 0.06333330273628235,
-          "Left": 0.1718519926071167,
-          "Top": 0.7366669774055481,
-          "Width": 0.11061699688434601
-        },
-        "classified_emotion": "HAPPY",
-        "classified_emotion_confidence": 99.92965151369571686
-        },
-        {
-        "position":
-        {
-          "Height": 0.08333330273628235,
-          "Left": 0.3718519926071167,
-          "Top": 0.6366669774055481,
-          "Width": 0.21061699688434601
-        },
-        "classified_emotion": "HAPPY",
-        "classified_emotion_confidence": 98.92965151369571686
-        }
-    ]
-    }
+      "bucket": "bucket-computer-vision-s8",
+      "imageName": "car_1.jpg"
+    } 
   ```
-  Resposta a ser entregue quando não houver face:
+
+  Saída: 
 
   ```json
     {
-      "url_to_image": "https://myphotos/test.jpg",
-      "created_image": "02-02-2023 17:00:00",
-      "faces": [
-        {
-        "position":
-        {
-          "Height": Null,
-          "Left": Null,
-          "Top": Null,
-          "Width": Null
-        },
-        "classified_emotion": Null,
-        "classified_emotion_confidence": Null
-        }
-    ]
+        "url_to_image": "https://bucket-computer-vision-s8.s3.amazonaws.com/car_1.jpg",
+        "created_image": "28-09-2023 14:29:39",
+        "faces": [
+            {
+                "position": {
+                    "Height": null,
+                    "Left": null,
+                    "Top": null,
+                    "Width": null
+                },
+                "classified_emotion": null,
+                "classified_emotion_confidence": null
+            }
+        ]
     }
   ```
 
 ***
+<a id="ancora2-6"></a>
+
+- ## HTTP Responses
+
+  | Status Code |  Mensagem | 
+  |:----------------:|-------------------------------------------------------|
+  |`200` |Ok|
+  |`400` |Missing required parameter|
+  |`403` |You do not have permission to access this bucket|
+  |`404`|  Invalid S3 Object or S3 Image                                                     |
+  ||The requested resource could not be found. Please double-check the bucket name and try again.|
+  ||The requested file could not be found in the bucket. Please double-check the imageName and try again|
+  |`429`|Rate limit exceeded while processing the request|
+  |`500`|An error occurred in Amazon Rekognition|
+  ||An error occurred in Amazon S3|
+  ||Internal server error|
 
 <a id="ancora3"></a>
 
