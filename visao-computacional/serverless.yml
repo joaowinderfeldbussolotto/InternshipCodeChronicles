@@ -8,7 +8,6 @@ provider:
   region: us-east-1
   environment: 
     BUCKET_NAME: ${env:BUCKET_NAME}
-    PRINCIPAL_ARN: ${env:PRINCIPAL_ARN}
     USER_DEFAULT_ERROR: ${env:USER_DEFAULT_ERROR}
     MISSING_PARAM_ERROR: ${env:MISSING_PARAM_ERROR}
     REKOGNITION_DEFAULT_ERROR: ${env:REKOGNITION_DEFAULT_ERROR}
@@ -66,7 +65,7 @@ resources:
                     - "/*"
             - Effect: Allow
               Principal:
-                AWS: "${env:PRINCIPAL_ARN}"
+                AWS: "arn:aws:iam::${aws:accountId}:role/${self:provider.iam.role.name}"
               Action: 
                 - s3:ListBucket
               Resource:
