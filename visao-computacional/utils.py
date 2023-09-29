@@ -52,6 +52,7 @@ def create_body(imageName, createdImageDateTime, receivedBody, keyType = 'labels
 
 def get_data_from_body(body):
     bucket = body.get('bucket')
+    if bucket == "": bucket = None
     imageName = body.get('imageName')
     if not imageName: raise MissingParamException(param_name = 'imageName')
     return bucket, imageName
