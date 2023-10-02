@@ -29,12 +29,13 @@
   - [2.4 - Rota 4 - Post /v1/vision](#ancora2-4)
   - [2.5 - Rota 5 - Post /v2/vision](#ancora2-5)
   - [2.6 - HTTP Responses](#ancora2-6)
-- [3 - Acesso à Aplicação e Como Utilizá-la](#ancora3)
-- [4 - Estrutura de Pastas do Projeto](#ancora4)
-- [5 - Arquitetura AWS](#ancora5)
-- [6 - Dificuldades conhecidas](#ancora6)
-- [7 - Fonte das Imagens Utilizadas no Projeto](#ancora7)
-- [8 - Licença](#ancora8)
+- [3 - Instalação local e usabilidade deste respositório em novo ambiente](#ancora3)
+- [4 - Acesso à Aplicação e Como Utilizá-la](#ancora4)
+- [5 - Estrutura de Pastas do Projeto](#ancora5)
+- [6 - Arquitetura AWS](#ancora6)
+- [7 - Dificuldades conhecidas](#ancora7)
+- [8 - Fonte das Imagens Utilizadas no Projeto](#ancora8)
+- [9 - Licença](#ancora9)
 
 ***
 <a id="ancora1"></a>
@@ -227,7 +228,52 @@ O desenvolvimento do projeto envolveu a criação e configuração de funções 
 
 <a id="ancora3"></a>
 
-# 3 - Acesso à Aplicação e Como Utilizá-la
+# 3 - Instalação local e usabilidade deste respositório em novo ambiente
+
+0. Garanta possuir uma conta válida da AWS. Crie um IAM role para a conta, e o adicione suas credenciais ao seu arquivo `~/.aws/credentials`
+
+1. Faça o clone deste projeto a partir do github
+
+```bash
+git clone -b equipe-3 --single-branch https://github.com/Compass-pb-aws-2023-FURG-IFRS-UFFS/sprint-8-pb-aws-furg-ifrs-uffs && cd sprint-8-pb-aws-furg-ifrs-uffs
+```
+
+2. Mude para a pasta `visao-computacional` e altere o nome do arquivo em `example.env` para `.env` 
+
+```bash
+cd ./visao-computacional &&
+mv ./example.env ./.env
+```
+
+3. Coloque um nome disponível do S3 no primeiro atributo do novo arquivo `.env` : `BUCKET_NAME=your-bucket-name-here`
+
+4. Instale corretamente todos os plugins que são utilizados no projeto em `serverless.yml` e faça deploy
+
+```bash
+sls plugin install -n serverless-offline &&
+sls plugin install -n serverless-python-requirements &&
+sls deploy
+```
+
+5. Para fazer upload das imagens em `dataset/images/` para o seu novo bucket em um ambiente linux:
+
+```bash
+cd dataset/
+./sync_s3.sh
+```
+Obs: Caso ocorra algum erro durante o passo 5 com o nome do bucket, confira se sua .env possui caracteres windows não suportado pelo bash. Caso ocorra a falha, recomenda-se usar a ferramenta dos2unix no arquivo .env: `dos2unix ./../visao-computacional/.env` e rodar novamente `./sync_s3.sh`.
+
+Com isso agora, você já possui um bucket, e uma versão estável de aplicação lambda na AWS. Testes podem ser feitos por meio de ferramentas como o Postman, Curl, entre outros. Pode também seguir para o `4 - Acesso à Aplicação e Como Utilizá-la` para mais informações de como utilizar a aplicação usando a extensão `Rest Client` do VSCode.
+
+Agora você poderá fazer alterações locais no seu ambiente, e testá-las sem fazer deploy usando o comando:
+
+```bash
+sls offline
+```
+
+<a id="ancora4"></a>
+
+# 4 - Acesso à Aplicação e Como Utilizá-la
 
 ## **[Link](https://84ua33iq3d.execute-api.us-east-1.amazonaws.com/)**
 
@@ -266,9 +312,9 @@ Para facilitar o teste das APIs do projeto, configuramos o Visual Studio Code pa
   3. Você verá a resposta da API, incluindo o código de status HTTP e o corpo da resposta, na guia "Output".
 
 
-<a id="ancora4"></a>
+<a id="ancora5"></a>
 
-# 4 - Estrutura de Pastas do Projeto
+# 5 - Estrutura de Pastas do Projeto
 
 ```
 .
@@ -312,9 +358,9 @@ Para facilitar o teste das APIs do projeto, configuramos o Visual Studio Code pa
 
 ***
 
-<a id="ancora5"></a>
+<a id="ancora6"></a>
 
-# 5 - Arquitetura AWS
+# 6 - Arquitetura AWS
 
   <div align="center">
     <img src = "./assets/s8-arch-aws.drawio.png">
@@ -324,15 +370,16 @@ Para facilitar o teste das APIs do projeto, configuramos o Visual Studio Code pa
 
 ***
 
-<a id="ancora6"></a>
-# 6 - Dificuldades conhecidas
+<a id="ancora7"></a>
+
+# 7 - Dificuldades conhecidas
 
 1. Dificuldade de integrar os códigos de erro dos serviços da AWS.
 
 
-<a id="ancora7"></a>
+<a id="ancora8"></a>
 
-# 7 - Fonte das Imagens Utilizadas no Projeto
+# 8 - Fonte das Imagens Utilizadas no Projeto
 
 - [NVlabs/ffhq-dataset: Flickr-Faces-HQ Dataset (FFHQ) (github.com)](https://github.com/NVlabs/ffhq-dataset/tree/master)
 - [The Images of Groups Dataset (cornell.edu)](http://chenlab.ece.cornell.edu/people/Andy/ImagesOfGroups.html)
@@ -342,7 +389,8 @@ Para facilitar o teste das APIs do projeto, configuramos o Visual Studio Code pa
 - [autotrader](autotrader.com)
 - [usnews](usnews.com)
 
-<a id="ancora8"></a>
-# 8 - Licença
+<a id="ancora9"></a>
+
+# 9 - Licença
 
 Este projeto está licenciado sob a Licença MIT - consulte o [Link](https://mit-license.org/) para obter mais detalhes.
