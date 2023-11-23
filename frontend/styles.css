@@ -1,0 +1,118 @@
+/* Adicione estas regras ao seu arquivo styles.css */
+:root {
+  --bg-color: #000000;
+  --main-color: #FFFFFC;
+  --main-content-color: #BEB7A4;
+  --btn-primary-color: #FF7F11;
+  --btn-secondary-color: #FF3F00;
+  --btn-submit-color: #2ed94a;
+}
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+
+footer,header {
+  text-align: center;
+  background-color: var(--bg-color);
+  color: white;
+  padding: 10px;
+}
+main {
+  flex-grow: 1;
+  display: flex;
+  background: var(--main-color);
+  margin: 0 auto;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+}
+.main-content {
+  font-size: 20px;
+  background: var(--main-content-color);
+  margin-block: 40px;
+  padding: 50px;
+  display: flex;
+  gap: 15px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 500px;
+  border: solid 4px;
+  border-radius: 50px 0px 50px 0px;
+}
+pre {
+  width: 50ch;
+}
+.main-content.output {
+  display: none;
+}
+#jsonContainer {
+  /* font-weight: bold; */
+  font-size: 22px;
+  max-width: 500ch; /* Largura máxima do contêiner */
+  padding: 10px; /* Espaçamento interno */
+  white-space: pre-wrap; /* Quebra de linha automática para manter o JSON formatado */
+  word-wrap: break-word;
+  font-family: monospace; /* Usar uma fonte monoespaçada para manter a formatação */
+}
+input {
+  padding: 10px;
+  font-size: 20px;
+}
+label{
+  display: block;
+  font-size: 25px;
+  font-weight: bold;
+}
+form {
+  width: 100%;
+  display: grid;
+  gap: 10px;
+}
+#phrase {
+  grid-column: 1;
+  grid-row: 2;
+}
+input[type='submit']{
+  background: var(--btn-submit-color);
+  grid-column: 2;
+  grid-row: 2;
+}
+button {
+  width: 100%;
+  background: var(--btn-primary-color);
+}
+button, input[type='submit'] {
+  font-weight: bold;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 10px;
+  transition: 0.4s;
+}
+
+button:hover {
+  background: var(--btn-secondary-color);
+}
+input[type='submit']:hover{
+  background: #24ab3b;
+}
+
+.try-again {
+  visibility: hidden;
+  cursor: pointer;
+}
+.audio {
+  cursor: pointer;
+  border: 1px solid;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  visibility: hidden;
+}

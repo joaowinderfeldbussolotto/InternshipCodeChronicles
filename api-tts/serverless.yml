@@ -1,0 +1,135 @@
+service: api-tts-sprint6
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: python3.9
+  environment:
+    AWS_REGION_NAME: ${self:custom.env.AWS_REGION_NAME}
+    BUCKET_NAME: ${self:custom.env.bucketName}
+    DYNAMODB_TABLE_NAME: ${self:custom.env.tableName}
+  iam:
+    role:
+      name: iam-for-lambda-tts
+      statements:
+        - Effect: Allow
+          Action:
+            - s3:GetObject
+            - s3:PutObject
+          Resource:
+            - arn:aws:s3:::${self:custom.env.bucketName}/*
+        - Effect: Allow
+          Action:
+            - dynamodb:PutItem
+            - dynamodb:GetItem
+          Resource:
+            - arn:aws:dynamodb:${self:custom.env.AWS_REGION_NAME}:*:table/${self:custom.env.tableName}
+        - Effect: Allow
+          Action:
+            - polly:SynthesizeSpeech
+          Resource: "*"
+resources:
+  Resources:
+    MyS3Bucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${self:custom.env.bucketName}
+        PublicAccessBlockConfiguration:
+          BlockPublicPolicy: false
+          RestrictPublicBuckets: false
+
+
+    MyBucketPolicy:
+      Type: AWS::S3::BucketPolicy
+      Properties:
+        Bucket:
+          Ref: MyS3Bucket
+        PolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Principal:
+                AWS: "*"
+              Action: s3:GetObject
+              Resource:
+                Fn::Join:
+                  - ""
+                  - - "arn:aws:s3:::"
+                    - Ref: MyS3Bucket
+                    - "/*"
+            - Effect: Allow
+              Principal:
+                AWS: ${self:custom.env.principalArn}
+              Action: s3:PutObject
+              Resource:
+                Fn::Join:
+                  - ""
+                  - - "arn:aws:s3:::"
+                    - Ref: MyS3Bucket
+                    - "/*"
+
+    MyDynamoDBTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:custom.env.tableName}
+        BillingMode: PROVISIONED
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        KeySchema:
+          - AttributeName: unique_id
+            KeyType: HASH
+        AttributeDefinitions:
+          - AttributeName: unique_id
+            AttributeType: S
+
+custom:
+  env: ${file(./env.yml)}
+
+functions:
+  health:
+    handler: routes/health.health
+    events:
+      - httpApi:
+          path: /
+          method: get
+  v1Description:
+    handler: routes/v1.v1_description
+    events:
+      - httpApi:
+          path: /v1
+          method: get
+  v2Description:
+    handler: routes/v2.v2_description
+    events:
+      - httpApi:
+          path: /v2
+          method: get
+  v1TTS: 
+    handler: routes/v1.post_v1_tts
+    events:
+      - httpApi:
+          path: /v1/tts
+          method: post  
+  v2TTS: 
+    handler: routes/v2.post_v2_tts
+    events:
+      - httpApi:
+          path: /v2/tts
+          method: post  
+  v3TTS: 
+    handler: routes/v3.post_v3_tts
+    events:
+      - httpApi:
+          path: /v3/tts
+          method: post
+      
+
+plugins:
+  - serverless-offline
+  - serverless-python-requirements
+
+package:
+  exclude:
+    - node_modules/**
+    - venv/**

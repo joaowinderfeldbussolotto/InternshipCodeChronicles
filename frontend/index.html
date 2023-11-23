@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App da Equipe-5</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+
+</head>
+
+<body>
+    <header>
+        <h1>Text to Speech App 😀</h1>
+        <div class="try-again">Try Again</div>
+    </header>
+
+    <main>
+        <div class="main-content input">
+            <form id="form" method="post">
+                <label for="phrase">Frase desejada:</label>
+                <input type="text" id="phrase" name="phrase">
+                <input type="submit" value="Enviar" id="submit">
+            </form>
+            
+            <button onclick="handleURL('v1')">v1/tts</button>
+            <button onclick="handleURL('v2')">v2/tts</button>
+            <button onclick="handleURL('v3')">v3/tts</button>
+        </div>
+        <div class="main-content output">
+            <div id="jsonContainer"></div>
+        </div>
+        <div class="audio"></div>
+    </main>
+    <footer>
+        <h2><p>&copy; 2023 Equipe-5. Todos os direitos reservados.</p></h2>
+    </footer>
+    
+
+    <script src="./index.js"></script>
+    <script>
+
+    </script>
+</body>
+
+</html>
