@@ -14,7 +14,7 @@ Bem-vindo ao repositório do meu estágio em Machine Learning com AWS, onde comp
    - [Text-to-Speech API](https://github.com/joaowinderfeldbussolotto/InternshipCodeChronicles/tree/text-to-speech-API)
 
 4. **Hotel Reservations Prediction API**
-   - [Hotel Reservations Prediction API](https://github.com/joaowinderfeldbussolotto/InternshipCodeChronicles/tree/hotel-reservations-prediction-API)
+   - [Hotel Reservations Prediction API](https://github.com/joaowinderfeldbussolotto/InternshipCodeChronicles/tree/hotel-reservations-prediciton-API)
 
 
 
